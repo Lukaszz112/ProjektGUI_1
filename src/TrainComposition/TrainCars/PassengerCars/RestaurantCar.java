@@ -1,6 +1,6 @@
 package TrainComposition.TrainCars.PassengerCars;
 
-import TrainComposition.TrainCars.Abstract.ElectricCars;
+import TrainComposition.TrainCars.Interfaces.ElectricCars;
 import TrainComposition.TrainCars.Abstract.PassengerCars;
 import TrainComposition.TrainCars.Abstract.TrainCarPassengerType;
 

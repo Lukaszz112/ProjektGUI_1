@@ -1,5 +1,6 @@
 package Menu.CreateTrainCars;
 
+import Menu.Interfaces.CorrectType;
 import TrainComposition.TrainCars.Abstract.TrainCar;
 import TrainComposition.TrainCars.Abstract.TrainCarPassengerType;
 import TrainComposition.TrainCars.PassengerCars.PassengerCar;
@@ -8,21 +9,21 @@ import TrainComposition.TrainCars.PassengerCars.RestaurantCar;
 import java.util.List;
 import java.util.Scanner;
 
-public class CreatePassengerCar {
+public class CreatePassengerCar implements CorrectType {
     private final TrainCarPassengerType[] trainCarPassengerTypes = TrainCarPassengerType.values();
     Scanner scan = new Scanner(System.in);
     public void create(List<TrainCar> trainCarList){
         System.out.println("Number of seats: ");
-        int numOfSeats = scan.nextInt();
+        int numOfSeats = getValue(scan, Integer.class);
 
         System.out.println("Security company: ");
         String security = scan.next();
 
         System.out.println("Net weight: ");
-        double netWeight = scan.nextDouble();
+        double netWeight = getValue(scan, Double.class);
 
         System.out.println("Gross weight: ");
-        double grossWeight = scan.nextDouble();
+        double grossWeight = getValue(scan, Double.class);
 
         System.out.println("==========================");
         for (int i = 0; i < trainCarPassengerTypes.length; i++) {
@@ -35,7 +36,7 @@ public class CreatePassengerCar {
         int temp;
 
         do {
-            temp = scan.nextInt();
+            temp = getValue(scan, Integer.class);
             if(temp < 0 || temp > trainCarPassengerTypes.length){
                 System.out.println("Please select correct type!");
             }
@@ -44,9 +45,9 @@ public class CreatePassengerCar {
         switch (temp){
             case 1 -> {
                 System.out.println("Number of compartment: ");
-                int numOfCompartment = scan.nextInt();
+                int numOfCompartment = getValue(scan, Integer.class);
                 System.out.println("Number of Vip seats: ");
-                int numOfVipSeats = scan.nextInt();
+                int numOfVipSeats = getValue(scan, Integer.class);
                 trainCarList.add(
                         new PassengerCar(
                                 numOfSeats,
@@ -60,7 +61,7 @@ public class CreatePassengerCar {
             }
             case 2 -> {
                 System.out.println("Number of compartment: ");
-                int numOfCrew = scan.nextInt();
+                int numOfCrew = getValue(scan, Integer.class);
                 System.out.println("Number of Vip seats: ");
                 String responsibleCompany = scan.next();
                 trainCarList.add(

@@ -1,6 +1,6 @@
 package TrainComposition.TrainCars.FreightCars.Basic;
 
-import TrainComposition.TrainCars.Abstract.ElectricCars;
+import TrainComposition.TrainCars.Interfaces.ElectricCars;
 import TrainComposition.TrainCars.Abstract.FreightCars;
 import TrainComposition.TrainCars.Abstract.TrainCarFreightType;
 

@@ -1,29 +1,28 @@
 package Menu;
 
+import Menu.Interfaces.CorrectType;
 import TrainComposition.Locomotive.Locomotive;
 
 import java.util.Scanner;
 
-public class CreateLocomotive {
-    private String name;
-    private String homeStation;
-    private int numOfTrainCars;
-    private int numOfElectricTrainCars;
-    private double torsion;
-
+public class CreateLocomotive implements CorrectType {
     Scanner scan = new Scanner(System.in);
 
     public Locomotive createLocomotive(){
         System.out.println("Enter locomotive name: ");
-        name = scan.next();
+        String name = scan.next();
+
         System.out.println("Enter name of home station: ");
-        homeStation = scan.next();
+        String homeStation = scan.next();
+
         System.out.println("Enter maximum quantity of train cars: ");
-        numOfTrainCars = scan.nextInt();
+        int numOfTrainCars = getValue(scan, Integer.class);
+
         System.out.println("Enter maximum quantity of electric cars: ");
-        numOfElectricTrainCars = scan.nextInt();
+        int numOfElectricTrainCars = getValue(scan, Integer.class);
+
         System.out.println("Enter maximum weight of train cars: ");
-        torsion = scan.nextDouble();
+        double torsion = getValue(scan, Double.class);
 
         return new Locomotive(name, homeStation, numOfTrainCars, numOfElectricTrainCars, torsion);
     }

@@ -2,13 +2,14 @@ package Menu;
 
 import Menu.Exception.ThereIsNoSuchLocomotiveYet;
 import Menu.Exception.ThisLocomotiveIsAlreadyUsed;
+import Menu.Interfaces.CorrectType;
 import TrainComposition.Locomotive.Locomotive;
 import TrainComposition.TrainComposition;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class CreateTrainComposition{
+public class CreateTrainComposition implements CorrectType {
     Scanner scan = new Scanner(System.in);
     public void initialize(
             List<TrainComposition> trainCompositionList,
@@ -21,7 +22,7 @@ public class CreateTrainComposition{
         locomotiveList.stream().map(Locomotive::toString).forEach(System.out::println);
 
         System.out.println("Which locomotive do you want to use? (uid): ");
-        int locomotiveUid = scan.nextInt();
+        int locomotiveUid = getValue(scan, Integer.class);
 
         Locomotive locomotiveToAdd = locomotiveList
                 .stream()

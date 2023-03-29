@@ -2,7 +2,7 @@ package TrainComposition;
 
 import TrainComposition.Exceptions.*;
 import TrainComposition.Locomotive.Locomotive;
-import TrainComposition.TrainCars.Abstract.ElectricCars;
+import TrainComposition.TrainCars.Interfaces.ElectricCars;
 import TrainComposition.TrainCars.Abstract.TrainCar;
 
 import java.util.List;

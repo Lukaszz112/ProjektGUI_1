@@ -1,0 +1,27 @@
+package Menu.Interfaces;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.Scanner;
+
+public interface CorrectType{
+    default <T extends Number> T getValue(Scanner s, Class<T> clazz) {
+        do {
+            if (!s.hasNext()) {
+                s.nextLine();
+                System.out.println("Invalid input, please try again.");
+                continue;
+            }
+            try {
+                return clazz.getConstructor(String.class).newInstance(s.next());
+            } catch (
+                    NoSuchMethodException |
+                    InstantiationException |
+                    IllegalAccessException |
+                    InvocationTargetException e
+            ) {
+                System.out.println("Invalid input, please try again.");
+                s.nextLine();
+            }
+        } while (true);
+    }
+}

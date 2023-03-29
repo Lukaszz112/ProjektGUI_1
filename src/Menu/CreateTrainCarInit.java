@@ -1,14 +1,14 @@
 package Menu;
 
 import Menu.CreateTrainCars.CreateTrainCar;
+import Menu.Interfaces.CorrectType;
 import TrainComposition.TrainCars.Abstract.TrainCar;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class CreateTrainCarInit {
+public class CreateTrainCarInit implements CorrectType {
     Scanner scan = new Scanner(System.in);
-
     public void initialize(List<TrainCar> trainCarList){
         System.out.println("===================");
         System.out.println("1. Freight Car     ");
@@ -18,7 +18,7 @@ public class CreateTrainCarInit {
 
         int userChoice;
         do{
-            userChoice = scan.nextInt();
+            userChoice = getValue(scan, Integer.class);
             if(userChoice > 2 || userChoice < 1){
                 System.out.println("Please type correct number!");
             }
