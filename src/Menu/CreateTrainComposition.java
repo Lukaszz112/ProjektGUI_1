@@ -49,5 +49,6 @@ public class CreateTrainComposition implements CorrectType {
         }
 
         trainCompositionList.add(new TrainComposition(locomotiveToAdd));
+        System.out.println("Train composition created!");
     }
 }

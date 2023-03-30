@@ -9,5 +9,6 @@ public class CreateTrainCar {
             case 1 -> new CreateFreightCar().create(trainCarList);
             case 2 -> new CreatePassengerCar().create(trainCarList);
         }
+        System.out.println("Train car created!");
     }
 }

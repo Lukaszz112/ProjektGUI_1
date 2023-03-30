@@ -2,19 +2,23 @@ package Menu;
 
 import Menu.Exception.ThereIsNoSuchLocomotiveYet;
 import Menu.Exception.ThisLocomotiveIsAlreadyUsed;
+import Menu.Exception.TrainStationExist;
 import Menu.Interfaces.CorrectType;
+import Route.TrainStation;
 import TrainComposition.Locomotive.Locomotive;
 import TrainComposition.TrainCars.Abstract.TrainCar;
 import TrainComposition.TrainComposition;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
 public class CreateMenuInit implements CorrectType {
     private List<Locomotive> locomotiveList = new ArrayList<>();
-    private List<TrainComposition> trainCompositionList = new ArrayList<>();
+    private List<TrainComposition> trainCompositionList = new LinkedList<>();
     private List<TrainCar> trainCarList = new ArrayList<>();
+    private List<TrainStation> trainStationList = new ArrayList<>();
     public void initialize(){
         Scanner scan = new Scanner(System.in);
 
@@ -40,7 +44,11 @@ public class CreateMenuInit implements CorrectType {
                     }
                     break;
                 case 4:
-                    //Create train station
+                    try{
+                        new CreateTrainStation().create(trainStationList);
+                    }catch (TrainStationExist e){
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 5:
                     // Manage train car goods

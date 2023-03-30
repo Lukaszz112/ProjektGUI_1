@@ -24,6 +24,8 @@ public class CreateLocomotive implements CorrectType {
         System.out.println("Enter maximum weight of train cars: ");
         double torsion = getValue(scan, Double.class);
 
+        System.out.println("Locomotive created!");
+
         return new Locomotive(name, homeStation, numOfTrainCars, numOfElectricTrainCars, torsion);
     }
 }

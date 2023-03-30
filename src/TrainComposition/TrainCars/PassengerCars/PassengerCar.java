@@ -5,8 +5,8 @@ import TrainComposition.TrainCars.Abstract.PassengerCars;
 import TrainComposition.TrainCars.Abstract.TrainCarPassengerType;
 
 public class PassengerCar extends PassengerCars implements ElectricCars {
-    private int numOfCompartment;
-    private int numOfVipSeats;
+    private final int numOfCompartment;
+    private final int numOfVipSeats;
 
     public PassengerCar(
             int numOfSeats,
