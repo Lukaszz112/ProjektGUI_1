@@ -88,10 +88,16 @@ public class TrainComposition {
     @Override
     public String toString() {
         return "Train Composition includes: " +
-                "Locomotive:" + locomotive +
-                ", Train Cars (uid): " + trainCars.stream()
+                "Locomotive: " + locomotive +
+                ", Train Cars (uid): " +
+                (
+                        trainCars != null ?
+                                trainCars.stream()
                                             .map(i -> String.valueOf(i.getUid()))
-                                            .collect(Collectors.joining(", "));
+                                            .collect(Collectors.joining(", "))
+                                : null
+                );
+
 
     }
 }

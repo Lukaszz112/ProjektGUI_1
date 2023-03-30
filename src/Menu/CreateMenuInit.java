@@ -15,10 +15,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CreateMenuInit implements CorrectType {
-    private List<Locomotive> locomotiveList = new ArrayList<>();
-    private List<TrainComposition> trainCompositionList = new LinkedList<>();
-    private List<TrainCar> trainCarList = new ArrayList<>();
-    private List<TrainStation> trainStationList = new ArrayList<>();
+    private final List<Locomotive> locomotiveList = new ArrayList<>();
+    private final List<TrainComposition> trainCompositionList = new LinkedList<>();
+    private final List<TrainCar> trainCarList = new ArrayList<>();
+    private final List<TrainStation> trainStationList = new ArrayList<>();
     public void initialize(){
         Scanner scan = new Scanner(System.in);
 
