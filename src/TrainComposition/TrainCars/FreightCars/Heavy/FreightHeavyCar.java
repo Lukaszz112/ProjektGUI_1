@@ -9,6 +9,7 @@ public abstract class FreightHeavyCar extends FreightCars {
 
     public FreightHeavyCar(
             String security,
+            String sender,
             double netWeight,
             double grossWeight,
             TrainCarFreightType typeOfGoods,
@@ -17,6 +18,7 @@ public abstract class FreightHeavyCar extends FreightCars {
     ) {
         super(
                 security,
+                sender,
                 netWeight,
                 grossWeight,
                 typeOfGoods

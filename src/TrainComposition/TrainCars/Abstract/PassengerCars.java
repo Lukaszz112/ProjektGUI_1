@@ -3,6 +3,8 @@ package TrainComposition.TrainCars.Abstract;
 import TrainComposition.Exceptions.TooHeavyToGoException;
 import TrainComposition.TrainCars.Exceptions.TooManyPeopleException;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public abstract class PassengerCars extends TrainCar{
     private int numOfSeats;
     private int numOfPeople = 0;
@@ -25,7 +27,7 @@ public abstract class PassengerCars extends TrainCar{
         this.numOfSeats = numOfSeats;
     }
 
-    public void addPerson(double weight){
+    public void addPerson(double weight) throws TooHeavyToGoException {
         if(this.numOfPeople + 1 > this.numOfSeats){
             throw new TooManyPeopleException(
                     "There is too many people inside! Try to another one."
@@ -39,10 +41,12 @@ public abstract class PassengerCars extends TrainCar{
 
     @Override
     public String toString() {
-        return "Passenger car includes: " +
-                "\n number of seats: " + numOfSeats +
-                "\n number of people: " + numOfPeople +
-                "\n people weight: " + peopleWeight +
-                "\n type of goods: '" + typeOfGoods;
+        return getUid() + ". Passenger car: " +
+                ", net weight: " + getNetWeight() +
+                ", gross weight: " + getGrossWeight() +
+                ", number of seats: " + numOfSeats +
+                ", number of people: " + numOfPeople +
+                ", people weight: " + peopleWeight +
+                ", type of goods: " + typeOfGoods;
     }
 }

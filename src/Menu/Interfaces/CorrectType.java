@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
 
 public interface CorrectType{
-    default <T extends Number> T getValue(Scanner s, Class<T> clazz) {
+    default <T extends Number> T getValue(Scanner s, Class<T> type) {
         do {
             if (!s.hasNext()) {
                 s.nextLine();
@@ -12,7 +12,7 @@ public interface CorrectType{
                 continue;
             }
             try {
-                return clazz.getConstructor(String.class).newInstance(s.next());
+                return type.getConstructor(String.class).newInstance(s.next());
             } catch (
                     NoSuchMethodException |
                     InstantiationException |

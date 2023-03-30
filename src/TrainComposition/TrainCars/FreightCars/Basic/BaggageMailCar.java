@@ -9,6 +9,7 @@ public class BaggageMailCar extends FreightCars {
 
     public BaggageMailCar(
             String security,
+            String sender,
             double netWeight,
             double grossWeight,
             int amountOfLuggage,
@@ -16,6 +17,7 @@ public class BaggageMailCar extends FreightCars {
     ) {
         super(
                 security,
+                sender,
                 netWeight,
                 grossWeight,
                 TrainCarFreightType.BAGGAGE_MAIL_CAR

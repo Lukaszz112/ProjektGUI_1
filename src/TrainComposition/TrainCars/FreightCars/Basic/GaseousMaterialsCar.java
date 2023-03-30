@@ -9,6 +9,7 @@ public class GaseousMaterialsCar extends FreightCars {
 
     public GaseousMaterialsCar(
             String security,
+            String sender,
             double netWeight,
             double grossWeight,
             String typeOfGas,
@@ -16,6 +17,7 @@ public class GaseousMaterialsCar extends FreightCars {
     ) {
         super(
                 security,
+                sender,
                 netWeight,
                 grossWeight,
                 TrainCarFreightType.GASEOUS_MATERIALS_CAR

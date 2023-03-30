@@ -1,6 +1,6 @@
 package TrainComposition.Exceptions;
 
-public class TooManyElectricCarsException extends RuntimeException{
+public class TooManyElectricCarsException extends Exception{
     public TooManyElectricCarsException(String message) {
         super(message);
     }

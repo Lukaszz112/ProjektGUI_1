@@ -10,6 +10,7 @@ public class RefrigeratedCar extends FreightCars implements ElectricCars {
 
     public RefrigeratedCar(
             String security,
+            String sender,
             double netWeight,
             double grossWeight,
             int minimumTemperature,
@@ -17,6 +18,7 @@ public class RefrigeratedCar extends FreightCars implements ElectricCars {
     ) {
         super(
                 security,
+                sender,
                 netWeight,
                 grossWeight,
                 TrainCarFreightType.REFRIGERATED_CAR

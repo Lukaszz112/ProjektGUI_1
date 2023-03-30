@@ -10,6 +10,7 @@ public class MailCar extends FreightCars implements ElectricCars {
 
     public MailCar(
             String security,
+            String sender,
             double netWeight,
             double grossWeight,
             int numOfShipments,
@@ -17,6 +18,7 @@ public class MailCar extends FreightCars implements ElectricCars {
     ) {
         super(
                 security,
+                sender,
                 netWeight,
                 grossWeight,
                 TrainCarFreightType.MAIL_CAR

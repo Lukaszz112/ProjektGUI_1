@@ -51,7 +51,7 @@ public class CreateMenuInit implements CorrectType {
                     }
                     break;
                 case 5:
-                    // Manage train car goods
+                    new ManageTrainCompositionInit().initialize(trainCompositionList, trainCarList);
                     break;
                 case 6:
                     trainCompositionList.stream().map(TrainComposition::toString).forEach(System.out::println);

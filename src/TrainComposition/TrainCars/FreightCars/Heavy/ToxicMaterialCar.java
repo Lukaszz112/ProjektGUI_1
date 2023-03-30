@@ -8,6 +8,7 @@ public class ToxicMaterialCar extends FreightHeavyCar{
 
     public ToxicMaterialCar(
             String security,
+            String sender,
             double netWeight,
             double grossWeight,
             String typeOfToxicMaterial,
@@ -15,6 +16,7 @@ public class ToxicMaterialCar extends FreightHeavyCar{
     ) {
         super(
                 security,
+                sender,
                 netWeight,
                 grossWeight,
                 TrainCarFreightType.TOXIC_MATERIALS_CAR,

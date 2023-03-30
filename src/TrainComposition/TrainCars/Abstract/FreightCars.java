@@ -4,7 +4,6 @@ import TrainComposition.TrainCars.Exceptions.InvalidTypeOfGoodsException;
 import TrainComposition.TrainCars.Exceptions.TooHeavyGoodsException;
 
 import java.util.Objects;
-
 public abstract class FreightCars extends TrainCar {
     private String sender;
     private TrainCarFreightType typeOfGoods;
@@ -12,6 +11,7 @@ public abstract class FreightCars extends TrainCar {
 
     public FreightCars(
             String security,
+            String sender,
             double netWeight,
             double grossWeight,
             TrainCarFreightType typeOfGoods
@@ -22,6 +22,7 @@ public abstract class FreightCars extends TrainCar {
                 grossWeight
         );
         this.typeOfGoods = typeOfGoods;
+        this.sender = sender;
     }
 
     public void addLoad(TrainCarFreightType typeOfGoods, double weightOfTheGoods, String sender){
@@ -41,5 +42,14 @@ public abstract class FreightCars extends TrainCar {
                     this.weightOfTheGoods
             );
         }
+    }
+
+    @Override
+    public String toString() {
+        return getUid() + ". Freight car: " +
+                ", sender: " + sender +
+                ", net weight: " + getNetWeight() +
+                ", gross weight: " + getGrossWeight() +
+                ", type of goods: " + typeOfGoods;
     }
 }

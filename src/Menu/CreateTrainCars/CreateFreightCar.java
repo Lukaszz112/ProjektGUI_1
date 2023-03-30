@@ -18,6 +18,9 @@ public class CreateFreightCar implements CorrectType {
         System.out.println("Security company: ");
         String security = scan.next();
 
+        System.out.println("Sender: ");
+        String sender = scan.next();
+
         System.out.println("Net weight: ");
         double netWeight = getValue(scan, Double.class);
 
@@ -50,6 +53,7 @@ public class CreateFreightCar implements CorrectType {
                 trainCarList.add(
                         new BaggageMailCar(
                                 security,
+                                sender,
                                 netWeight,
                                 grossWeight,
                                 amountOfLuggage,
@@ -65,6 +69,7 @@ public class CreateFreightCar implements CorrectType {
                 trainCarList.add(
                         new GaseousMaterialsCar(
                                 security,
+                                sender,
                                 netWeight,
                                 grossWeight,
                                 typeOfGas,
@@ -80,6 +85,7 @@ public class CreateFreightCar implements CorrectType {
                 trainCarList.add(
                         new LiquidGoodsCar(
                                 security,
+                                sender,
                                 netWeight,
                                 grossWeight,
                                 liquidComposition,
@@ -95,6 +101,7 @@ public class CreateFreightCar implements CorrectType {
                 trainCarList.add(
                         new MailCar(
                                 security,
+                                sender,
                                 netWeight,
                                 grossWeight,
                                 numOfShipments,
@@ -110,6 +117,7 @@ public class CreateFreightCar implements CorrectType {
                 trainCarList.add(
                         new RefrigeratedCar(
                                 security,
+                                sender,
                                 netWeight,
                                 grossWeight,
                                 minimumTemperature,
@@ -125,6 +133,7 @@ public class CreateFreightCar implements CorrectType {
                 trainCarList.add(
                         new ExplosivesCar(
                                 security,
+                                sender,
                                 netWeight,
                                 grossWeight,
                                 typeOfExplosives,
@@ -140,6 +149,7 @@ public class CreateFreightCar implements CorrectType {
                 trainCarList.add(
                         new LiquidToxicMaterialCar(
                                 security,
+                                sender,
                                 netWeight,
                                 grossWeight,
                                 typeOfLiquidToxicMaterial,
@@ -155,6 +165,7 @@ public class CreateFreightCar implements CorrectType {
                 trainCarList.add(
                         new ToxicMaterialCar(
                                 security,
+                                sender,
                                 netWeight,
                                 grossWeight,
                                 typeOfToxicMaterial,

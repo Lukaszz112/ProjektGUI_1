@@ -9,6 +9,7 @@ public class LiquidGoodsCar extends FreightCars {
 
     public LiquidGoodsCar(
             String security,
+            String sender,
             double netWeight,
             double grossWeight,
             String liquidComposition,
@@ -16,6 +17,7 @@ public class LiquidGoodsCar extends FreightCars {
     ) {
         super(
                 security,
+                sender,
                 netWeight,
                 grossWeight,
                 TrainCarFreightType.LIQUID_GOODS_CAR

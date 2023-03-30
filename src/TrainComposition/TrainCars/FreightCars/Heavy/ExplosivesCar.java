@@ -8,6 +8,7 @@ public class ExplosivesCar extends FreightHeavyCar{
 
     public ExplosivesCar(
             String security,
+            String sender,
             double netWeight,
             double grossWeight,
             String typeOfExplosives,
@@ -15,6 +16,7 @@ public class ExplosivesCar extends FreightHeavyCar{
     ) {
         super(
                 security,
+                sender,
                 netWeight,
                 grossWeight,
                 TrainCarFreightType.EXPLOSIVES_CAR,
