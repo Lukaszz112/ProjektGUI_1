@@ -65,10 +65,13 @@ public class CreateMenuInit implements CorrectType {
                 case 9:
                     //Management
                     break;
+                case 0:
+                    System.exit(0);
+                    break;
                 default:
                     System.out.println("Please insert correct option!");
                     break;
             }
-        }while(userSelection != 0);
+        }while(true);
     }
 }
