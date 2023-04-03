@@ -85,7 +85,7 @@ public class TrainComposition {
                 .map(TrainCar::getUid)
                 .anyMatch(tmp -> tmp.equals(trainCar.getUid()));
 
-        if(!isPlugged){
+        if(!isPlugged && trainCar == null){
             throw new IsNotAlreadyPluggedException(
                     "The car is not already plugged! Plug first to remove again."
             );

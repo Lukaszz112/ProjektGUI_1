@@ -1,5 +1,6 @@
 package Menu;
 
+import Menu.Exception.DoesntExist;
 import Menu.Exception.ThereIsNoSuchLocomotiveYet;
 import Menu.Exception.ThisLocomotiveIsAlreadyUsed;
 import Menu.Exception.TrainStationExist;
@@ -51,7 +52,11 @@ public class CreateMenuInit implements CorrectType {
                     }
                     break;
                 case 5:
-                    new ManageTrainCompositionInit().initialize(trainCompositionList, trainCarList);
+                    try{
+                        new ManageTrainCompositionInit().initialize(trainCompositionList, trainCarList);
+                    }catch(DoesntExist e){
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 6:
                     trainCompositionList.stream().map(TrainComposition::toString).forEach(System.out::println);

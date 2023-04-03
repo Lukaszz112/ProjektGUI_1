@@ -7,7 +7,6 @@ import TrainComposition.TrainComposition;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class ManageTrainComposition implements CorrectType {
     Scanner scan = new Scanner(System.in);
@@ -70,7 +69,7 @@ public class ManageTrainComposition implements CorrectType {
 
     }
 
-    public void remove(List<TrainComposition> trainCompositionList){
+    public void remove(List<TrainComposition> trainCompositionList) throws IsNotAlreadyPluggedException {
         System.out.println("====================================");
 
         trainCompositionList.stream()
@@ -93,20 +92,22 @@ public class ManageTrainComposition implements CorrectType {
                 .findFirst()
                 .orElse(null);
 
+        List<TrainCar> trainCars = trainCompositionList.stream()
+                .flatMap(x -> x.getTrainCars().stream())
+                .toList();
+
+        if(!(trainCars.size() > 0)){
+            throw new IsNotAlreadyPluggedException("Train set does not include any train cars! Please plug first!");
+        }
+
         System.out.println("====================================");
 
-        trainCompositionList.stream()
-                        .map(TrainComposition::getTrainCars)
-                        .forEach(System.out::println);
+        trainCars.forEach(System.out::println);
 
         System.out.println("====================================");
         System.out.println("Select train car (uid): ");
 
         int userSelection2;
-
-        List<TrainCar> trainCars = trainCompositionList.stream()
-                .flatMap(x -> x.getTrainCars().stream())
-                .toList();
 
         do{
             userSelection2 = getValue(scan, Integer.class);

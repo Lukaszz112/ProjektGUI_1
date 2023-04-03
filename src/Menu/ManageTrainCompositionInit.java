@@ -1,6 +1,8 @@
 package Menu;
 
+import Menu.Exception.DoesntExist;
 import Menu.Interfaces.CorrectType;
+import TrainComposition.Exceptions.IsNotAlreadyPluggedException;
 import TrainComposition.TrainCars.Abstract.TrainCar;
 import TrainComposition.TrainComposition;
 
@@ -13,7 +15,11 @@ public class ManageTrainCompositionInit implements CorrectType {
     public void initialize(
             List<TrainComposition> trainCompositionList,
             List<TrainCar> trainCarList
-    ){
+    ) throws DoesntExist {
+        if(trainCompositionList.size() < 1){
+            throw new DoesntExist("Train composition doesnt exist! Create first!");
+        }
+
         System.out.println("========================");
         System.out.println("= 1. Add train car     =");
         System.out.println("= 2. Remove train car  =");
@@ -31,7 +37,13 @@ public class ManageTrainCompositionInit implements CorrectType {
 
         switch (userChoice) {
             case 1 -> new ManageTrainComposition().add(trainCompositionList, trainCarList);
-            case 2 -> new ManageTrainComposition().remove(trainCompositionList);
+            case 2 -> {
+                try {
+                    new ManageTrainComposition().remove(trainCompositionList);
+                }catch(IsNotAlreadyPluggedException e){
+                    System.out.println(e.getMessage());
+                }
+            }
         }
     }
 }
