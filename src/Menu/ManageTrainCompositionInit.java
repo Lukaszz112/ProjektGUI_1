@@ -17,7 +17,7 @@ public class ManageTrainCompositionInit implements CorrectType {
             List<TrainCar> trainCarList
     ) throws DoesntExist {
         if(trainCompositionList.size() < 1){
-            throw new DoesntExist("Train composition doesnt exist! Create first!");
+            throw new DoesntExist("Train composition doesn't exist! Create first!");
         }
 
         System.out.println("========================");

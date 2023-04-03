@@ -1,7 +1,7 @@
 package TrainComposition.TrainCars.Abstract;
 
-import TrainComposition.TrainCars.Exceptions.InvalidTypeOfGoodsException;
-import TrainComposition.TrainCars.Exceptions.TooHeavyGoodsException;
+import TrainComposition.TrainCars.Exceptions.InvalidTypeOfGoods;
+import TrainComposition.TrainCars.Exceptions.TooHeavyGoods;
 
 import java.util.Objects;
 public abstract class FreightCars extends TrainCar {
@@ -27,11 +27,11 @@ public abstract class FreightCars extends TrainCar {
 
     public void addLoad(TrainCarFreightType typeOfGoods, double weightOfTheGoods, String sender){
         if(!Objects.equals(typeOfGoods, this.typeOfGoods)){
-            throw new InvalidTypeOfGoodsException(
+            throw new InvalidTypeOfGoods(
                     "This type of goods is not correct to current car! Choose another one."
             );
         }else if(getNetWeight() + this.weightOfTheGoods + weightOfTheGoods > getGrossWeight()){
-            throw new TooHeavyGoodsException(
+            throw new TooHeavyGoods(
                     "These goods are too heavy for current car! Choose another one or remove some goods"
             );
         }else{
