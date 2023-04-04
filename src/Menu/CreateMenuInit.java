@@ -1,5 +1,6 @@
 package Menu;
 
+import Menu.CreateTrainCars.CreateTrainCar;
 import Menu.Exception.DoesntExist;
 import Menu.Exception.ThereIsNoSuchLocomotiveYet;
 import Menu.Exception.ThisLocomotiveIsAlreadyUsed;
@@ -24,6 +25,9 @@ public class CreateMenuInit implements CorrectType {
         Scanner scan = new Scanner(System.in);
 
         int userSelection;
+        new CreateTrainStation().create100station(trainStationList);
+        new CreateLocomotive().create5locomotive(locomotiveList);
+        new CreateTrainCar().create5traincars(trainCarList);
 
         do {
             System.out.println("What do you want to do?: ");
@@ -40,7 +44,7 @@ public class CreateMenuInit implements CorrectType {
                 case 3:
                     try {
                         new CreateTrainComposition().initialize(trainCompositionList, locomotiveList);
-                    }catch (ThisLocomotiveIsAlreadyUsed | ThereIsNoSuchLocomotiveYet e){
+                    }catch (ThisLocomotiveIsAlreadyUsed | ThereIsNoSuchLocomotiveYet | DoesntExist e){
                         System.out.println(e.getMessage());
                     }
                     break;

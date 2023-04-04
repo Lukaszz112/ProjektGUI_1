@@ -39,12 +39,13 @@ public abstract class PassengerCars extends TrainCar{
 
     @Override
     public String toString() {
-        return getUid() + ". Passenger car: " +
+        return "Passenger car: " +
                 ", net weight: " + getNetWeight() +
                 ", gross weight: " + getGrossWeight() +
                 ", number of seats: " + numOfSeats +
                 ", number of people: " + numOfPeople +
                 ", people weight: " + peopleWeight +
-                ", type of goods: " + typeOfGoods;
+                ", type of goods: " + typeOfGoods +
+                ", uid: " + getUid();
     }
 }

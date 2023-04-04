@@ -39,7 +39,7 @@ public class ManageTrainCompositionInit implements CorrectType {
             case 1 -> new ManageTrainComposition().add(trainCompositionList, trainCarList);
             case 2 -> {
                 try {
-                    new ManageTrainComposition().remove(trainCompositionList);
+                    new ManageTrainComposition().remove(trainCompositionList, trainCarList);
                 }catch(IsNotAlreadyPluggedException e){
                     System.out.println(e.getMessage());
                 }

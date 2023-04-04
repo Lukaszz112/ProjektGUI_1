@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class TrainComposition {
 
     private static final AtomicInteger count = new AtomicInteger(0);
-    private int uid = count.incrementAndGet();
+    private final int uid = count.incrementAndGet();
 
     public int getUid() {
         return uid;
@@ -23,7 +23,7 @@ public class TrainComposition {
     public Locomotive getLocomotive() {
         return locomotive;
     }
-    private List<TrainCar> trainCars = new ArrayList<>();
+    private final List<TrainCar> trainCars = new ArrayList<>();
 
     public List<TrainCar> getTrainCars() {
         return trainCars;

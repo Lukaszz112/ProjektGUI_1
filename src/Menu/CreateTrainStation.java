@@ -2,6 +2,7 @@ package Menu;
 
 import Menu.Exception.TrainStationExist;
 import Menu.Interfaces.CorrectType;
+import Route.StationData;
 import Route.TrainStation;
 
 import java.util.List;
@@ -10,6 +11,14 @@ import java.util.Scanner;
 public class CreateTrainStation implements CorrectType {
     Scanner scan = new Scanner(System.in);
 
+    public void create100station(List<TrainStation> trainStationList){
+        StationData[] trainStationNames = StationData.values();
+
+        for (StationData a :
+                trainStationNames) {
+            trainStationList.add(new TrainStation(String.valueOf(a)));
+        }
+    }
     public void create(List<TrainStation> trainStationList) throws TrainStationExist {
         System.out.println("Insert station name: ");
         String name = scan.next();

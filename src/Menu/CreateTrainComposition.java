@@ -1,5 +1,6 @@
 package Menu;
 
+import Menu.Exception.DoesntExist;
 import Menu.Exception.ThereIsNoSuchLocomotiveYet;
 import Menu.Exception.ThisLocomotiveIsAlreadyUsed;
 import Menu.Interfaces.CorrectType;
@@ -16,10 +17,13 @@ public class CreateTrainComposition implements CorrectType {
             List<Locomotive> locomotiveList
     ) throws
             ThereIsNoSuchLocomotiveYet,
-            ThisLocomotiveIsAlreadyUsed
-    {
+            ThisLocomotiveIsAlreadyUsed, DoesntExist {
 
         locomotiveList.stream().map(Locomotive::toString).forEach(System.out::println);
+
+        if(locomotiveList.size() < 1){
+            throw new DoesntExist("There is no one locomotive! Create first!");
+        }
 
         System.out.println("Which locomotive do you want to use? (uid): ");
         int locomotiveUid = getValue(scan, Integer.class);

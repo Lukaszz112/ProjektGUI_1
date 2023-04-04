@@ -1,5 +1,6 @@
 package Menu;
 
+import Menu.Exception.DoesntExist;
 import Menu.Interfaces.CorrectType;
 import TrainComposition.Exceptions.*;
 import TrainComposition.TrainCars.Abstract.TrainCar;
@@ -10,7 +11,8 @@ import java.util.Scanner;
 
 public class ManageTrainComposition implements CorrectType {
     Scanner scan = new Scanner(System.in);
-    public void add(List<TrainComposition> trainCompositionList, List<TrainCar> trainCarList){
+    public void add(List<TrainComposition> trainCompositionList, List<TrainCar> trainCarList) throws DoesntExist {
+
         System.out.println("====================================");
 
         trainCompositionList.stream()
@@ -33,14 +35,21 @@ public class ManageTrainComposition implements CorrectType {
                 .findFirst()
                 .orElse(null);
 
+        if(trainCarList.size() < 1){
+            throw new DoesntExist("Train car doesn't exist! Create first!");
+        }
+
         System.out.println("====================================");
 
         trainCarList.stream()
-                .map(TrainCar::toString)
+                .mapToInt(trainCarList::indexOf)
+                .mapToObj(i -> String.format("%d: %s", i + 1, trainCarList.get(i).toString()))
                 .forEach(System.out::println);
 
         System.out.println("====================================");
-        System.out.println("Select train car (uid): ");
+        System.out.println("Select train car (index): ");
+        // blad przy podlaczaniu tego samego wagonu do innych skladow pociagu !!!!!!!!!
+        // blad na dzialniach wagonow
 
         int userSelection2;
 
@@ -50,14 +59,12 @@ public class ManageTrainComposition implements CorrectType {
 
         int finalUserSelection2 = userSelection2;
 
-        TrainCar chosenTrainCar = trainCarList.stream()
-                .filter(x -> x.getUid() == finalUserSelection2)
-                .findFirst()
-                .orElse(null);
+        TrainCar chosenTrainCar = trainCarList.get(finalUserSelection2-1);
 
         try{
             assert chosenTrainComposition != null;
             chosenTrainComposition.add(chosenTrainCar);
+            trainCarList.remove(chosenTrainCar);
         }catch (
                 TooManyElectricCarsException |
                 TooHeavyToGoException |
@@ -69,7 +76,7 @@ public class ManageTrainComposition implements CorrectType {
 
     }
 
-    public void remove(List<TrainComposition> trainCompositionList) throws IsNotAlreadyPluggedException {
+    public void remove(List<TrainComposition> trainCompositionList, List<TrainCar> trainCarList) throws IsNotAlreadyPluggedException {
         System.out.println("====================================");
 
         trainCompositionList.stream()
@@ -92,37 +99,38 @@ public class ManageTrainComposition implements CorrectType {
                 .findFirst()
                 .orElse(null);
 
-        List<TrainCar> trainCars = trainCompositionList.stream()
+        List<TrainCar> localTrainCarList = trainCompositionList.stream()
                 .flatMap(x -> x.getTrainCars().stream())
                 .toList();
 
-        if(!(trainCars.size() > 0)){
+        if(!(localTrainCarList.size() > 0)){
             throw new IsNotAlreadyPluggedException("Train set does not include any train cars! Please plug first!");
         }
 
         System.out.println("====================================");
 
-        trainCars.forEach(System.out::println);
+        localTrainCarList.stream()
+                .mapToInt(localTrainCarList::indexOf)
+                .mapToObj(i -> String.format("%d: %s", i + 1, localTrainCarList.get(i).toString()))
+                .forEach(System.out::println);
 
         System.out.println("====================================");
-        System.out.println("Select train car (uid): ");
+        System.out.println("Select train car (index): ");
 
         int userSelection2;
 
         do{
             userSelection2 = getValue(scan, Integer.class);
-        }while(userSelection2 < 1 || userSelection2 > trainCars.size());
+        }while(userSelection2 < 1 || userSelection2 > localTrainCarList.size());
 
         int finalUserSelection2 = userSelection2;
 
-        TrainCar chosenTrainCar = trainCars.stream()
-                .filter(x -> x.getUid() == finalUserSelection2)
-                .findFirst()
-                .orElse(null);
+        TrainCar chosenTrainCar = localTrainCarList.get(finalUserSelection2 - 1);
 
         try{
             assert chosenTrainComposition != null;
             chosenTrainComposition.remove(chosenTrainCar);
+            trainCarList.add(chosenTrainCar);
         }catch (IsNotAlreadyPluggedException e) {
             System.out.println(e.getMessage());
         }

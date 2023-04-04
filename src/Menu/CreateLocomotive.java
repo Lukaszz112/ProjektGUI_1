@@ -3,6 +3,7 @@ package Menu;
 import Menu.Interfaces.CorrectType;
 import TrainComposition.Locomotive.Locomotive;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class CreateLocomotive implements CorrectType {
@@ -27,5 +28,11 @@ public class CreateLocomotive implements CorrectType {
         System.out.println("Locomotive created!");
 
         return new Locomotive(name, homeStation, numOfTrainCars, numOfElectricTrainCars, torsion);
+    }
+
+    public void create5locomotive(List<Locomotive> locomotiveList){
+        for (int i = 1; i < 6; i++) {
+            locomotiveList.add(new Locomotive(String.valueOf(i),String.valueOf(i),i,i,i));
+        }
     }
 }

@@ -46,10 +46,11 @@ public abstract class FreightCars extends TrainCar {
 
     @Override
     public String toString() {
-        return getUid() + ". Freight car: " +
+        return "Freight car: " +
                 ", sender: " + sender +
                 ", net weight: " + getNetWeight() +
                 ", gross weight: " + getGrossWeight() +
-                ", type of goods: " + typeOfGoods;
+                ", type of goods: " + typeOfGoods +
+                ", uid: " + getUid();
     }
 }
