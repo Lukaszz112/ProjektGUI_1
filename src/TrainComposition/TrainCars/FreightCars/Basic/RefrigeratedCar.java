@@ -27,4 +27,10 @@ public class RefrigeratedCar extends FreightCars implements ElectricCars {
         this.minimumTemperature = minimumTemperature;
     }
 
+    @Override
+    public String toString() {
+        return "Refrigerated car: " + super.toString() +
+                ", minimum temperature: " + minimumTemperature +
+                ", basic temperature: " + basicTemperature;
+    }
 }

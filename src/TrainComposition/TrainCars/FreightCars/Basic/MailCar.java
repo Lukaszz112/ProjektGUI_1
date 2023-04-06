@@ -27,4 +27,11 @@ public class MailCar extends FreightCars implements ElectricCars {
         this.numOfShipments = numOfShipments;
         this.responsibleCompany = responsibleCompany;
     }
+
+    @Override
+    public String toString() {
+        return "Mail car: " + super.toString() +
+                ", number of shipments: " + numOfShipments +
+                ", responsible company: " + responsibleCompany;
+    }
 }

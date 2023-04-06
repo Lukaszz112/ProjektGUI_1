@@ -30,7 +30,8 @@ public abstract class PassengerCars extends TrainCar{
             throw new TooManyPeople(
                     "There is too many people inside! Try to another one."
             );
-        }else if(getNetWeight() + peopleWeight + weight > getGrossWeight()){
+        }
+        if(getNetWeight() + peopleWeight + weight > getGrossWeight()){
             throw new TooHeavyToGoException(
                     "Weight limit reached! Try to another one."
             );
@@ -39,13 +40,12 @@ public abstract class PassengerCars extends TrainCar{
 
     @Override
     public String toString() {
-        return "Passenger car: " +
+        return  "uid: " + getUid() +
                 ", net weight: " + getNetWeight() +
                 ", gross weight: " + getGrossWeight() +
                 ", number of seats: " + numOfSeats +
                 ", number of people: " + numOfPeople +
-                ", people weight: " + peopleWeight +
-                ", type of goods: " + typeOfGoods +
-                ", uid: " + getUid();
+                ", people weight: " + peopleWeight;
+
     }
 }

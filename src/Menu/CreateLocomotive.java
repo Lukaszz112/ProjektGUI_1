@@ -2,19 +2,30 @@ package Menu;
 
 import Menu.Interfaces.CorrectType;
 import TrainComposition.Locomotive.Locomotive;
+import TrainJourney.StationData;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
-public class CreateLocomotive implements CorrectType {
+public class CreateLocomotive implements CorrectType{
     Scanner scan = new Scanner(System.in);
 
     public Locomotive createLocomotive(){
         System.out.println("Enter locomotive name: ");
         String name = scan.next();
 
-        System.out.println("Enter name of home station: ");
-        String homeStation = scan.next();
+        for (int i = 0; i < StationData.values().length; i++) {
+            System.out.println(i+1 + ". " + StationData.values()[i]);
+        }
+
+        System.out.println("Choose station: ");
+        int userChoice;
+        do{
+            userChoice = getValue(scan, Integer.class);
+        }while(userChoice >= StationData.values().length || userChoice < 0);
+
+        StationData homeStation = StationData.values()[userChoice-1];
 
         System.out.println("Enter maximum quantity of train cars: ");
         int numOfTrainCars = getValue(scan, Integer.class);
@@ -31,8 +42,16 @@ public class CreateLocomotive implements CorrectType {
     }
 
     public void createTestLocomotives(List<Locomotive> locomotiveList){
-        for (int i = 1; i < 6; i++) {
-            locomotiveList.add(new Locomotive(String.valueOf(i),String.valueOf(i),i,i,i));
+        Random rand = new Random();
+        for (int i = 1; i < AppConfig.quantityOfLocomotives; i++) {
+            locomotiveList.add(
+                    new Locomotive(
+                            "Locomotive " + i,
+                            StationData.values()[i],
+                            rand.nextInt(20)+5,
+                            rand.nextInt(10)+5,
+                            rand.nextInt(10000)+5000)
+            );
         }
     }
 }

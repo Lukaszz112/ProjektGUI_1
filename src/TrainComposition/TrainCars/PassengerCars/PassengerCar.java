@@ -28,4 +28,10 @@ public class PassengerCar extends PassengerCars implements ElectricCars {
         this.numOfVipSeats = numOfVipSeats;
     }
 
+    @Override
+    public String toString() {
+        return "Passenger car: " + super.toString() +
+                ", number of compartment: " + numOfCompartment +
+                ", number of Vip seats: " + numOfVipSeats;
+    }
 }

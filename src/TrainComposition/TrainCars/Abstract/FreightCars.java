@@ -30,27 +30,27 @@ public abstract class FreightCars extends TrainCar {
             throw new InvalidTypeOfGoods(
                     "This type of goods is not correct to current car! Choose another one."
             );
-        }else if(getNetWeight() + this.weightOfTheGoods + weightOfTheGoods > getGrossWeight()){
+        }
+        if(getNetWeight() + this.weightOfTheGoods + weightOfTheGoods > getGrossWeight()){
             throw new TooHeavyGoods(
                     "These goods are too heavy for current car! Choose another one or remove some goods"
             );
-        }else{
-            this.weightOfTheGoods += weightOfTheGoods;
-            this.sender = sender;
-            System.out.println("Added successfully! Current car weight: " +
-                    getNetWeight() +
-                    this.weightOfTheGoods
-            );
         }
+
+        this.weightOfTheGoods += weightOfTheGoods;
+        this.sender = sender;
+        System.out.println("Added successfully! Current car weight: " +
+                getNetWeight() +
+                this.weightOfTheGoods
+        );
     }
 
     @Override
     public String toString() {
-        return "Freight car: " +
+        return  "uid: " + getUid() +
                 ", sender: " + sender +
                 ", net weight: " + getNetWeight() +
-                ", gross weight: " + getGrossWeight() +
-                ", type of goods: " + typeOfGoods +
-                ", uid: " + getUid();
+                ", gross weight: " + getGrossWeight();
+
     }
 }

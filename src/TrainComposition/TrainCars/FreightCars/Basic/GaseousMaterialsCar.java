@@ -26,4 +26,11 @@ public class GaseousMaterialsCar extends FreightCars {
         this.resublimationTemperature = resublimationTemperature;
         this.typeOfGas = typeOfGas;
     }
+
+    @Override
+    public String toString() {
+        return "Gaseous materials car: " + super.toString() +
+                ", type of gas: " + typeOfGas +
+                ", resublimation temperature: " + resublimationTemperature;
+    }
 }

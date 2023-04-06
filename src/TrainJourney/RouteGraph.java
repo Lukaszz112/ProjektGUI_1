@@ -41,15 +41,26 @@ public class RouteGraph {
                 if(i==0){
                     this.addEdge(
                             trainStation,
-                            stationData.get(index+1),
+                            stationData.get(
+                                    stationData.indexOf(trainStation)+1 < 100 ?
+                                            stationData.indexOf(trainStation)+1 :
+                                            0
+                            ),
+                            distance
+                    );
+                    this.addEdge(
+                            trainStation,
+                            this.getNeighbors(trainStation)
+                                    .stream()
+                                    .map(Edge::getDestination)
+                                    .filter( x -> x == trainStation)
+                                    .findFirst()
+                                    .orElse(null) == null ?
+                            stationData.get(index) :
+                            null,
                             distance
                     );
                 }
-                this.addEdge(
-                        trainStation,
-                        stationData.get(index) == trainStation ? stationData.get(index+2) : stationData.get(index),
-                        distance
-                );
             }
         }
     }
@@ -57,6 +68,10 @@ public class RouteGraph {
     private static class Edge {
         TrainStation destination;
         int distance;
+
+        public TrainStation getDestination() {
+            return destination;
+        }
 
         public Edge(TrainStation destination, int distance) {
             this.destination = destination;

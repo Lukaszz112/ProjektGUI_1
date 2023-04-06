@@ -1,13 +1,10 @@
 package Menu;
 
-import Menu.CreateTrainCars.CreateTrainCar;
 import Menu.Exception.DoesntExist;
 import Menu.Exception.ThereIsNoSuchLocomotiveYet;
 import Menu.Exception.ThisLocomotiveIsAlreadyUsed;
 import Menu.Exception.TrainStationExist;
 import Menu.Interfaces.CorrectType;
-import TrainJourney.RouteGraph;
-import TrainJourney.StationData;
 import TrainJourney.TrainStation;
 import TrainComposition.Locomotive.Locomotive;
 import TrainComposition.TrainCars.Abstract.TrainCar;
@@ -26,20 +23,9 @@ public class CreateMenuInit implements CorrectType {
     public void initialize(){
         Scanner scan = new Scanner(System.in);
 
-        int userSelection;
-        new CreateTrainStation().createTestStation(trainStationList);
-        new CreateLocomotive().createTestLocomotives(locomotiveList);
-        new CreateTrainCar().createTestTraincars(trainCarList);
-        
-        RouteGraph graph = new RouteGraph();
-        graph.automaticAddStation(trainStationList);
-        graph.automaticAddEdge(trainStationList);
+        new TestObj().create(trainStationList,locomotiveList,trainCarList);
 
-        System.out.println(graph.getJourneyGraph().size());
-        for (TrainStation trainStation :
-                trainStationList) {
-            System.out.println(trainStation.toString() + ": " + graph.getNeighbors(trainStation));
-        }
+        int userSelection;
 
         do {
             System.out.println("What do you want to do?: ");

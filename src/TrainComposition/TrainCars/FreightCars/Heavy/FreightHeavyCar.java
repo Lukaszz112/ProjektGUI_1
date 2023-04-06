@@ -26,4 +26,11 @@ public abstract class FreightHeavyCar extends FreightCars {
         this.warnings = warnings;
         this.requiredLicenses = requiredLicenses;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                ", warnings: " + warnings +
+                ", requiredLicenses: " + requiredLicenses;
+    }
 }

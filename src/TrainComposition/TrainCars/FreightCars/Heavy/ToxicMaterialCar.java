@@ -27,4 +27,11 @@ public class ToxicMaterialCar extends FreightHeavyCar{
         this.capacity = capacity;
         this.typeOfToxicMaterial = typeOfToxicMaterial;
     }
+
+    @Override
+    public String toString() {
+        return "Toxic material car: " + super.toString() +
+                ", type of toxic material: " + typeOfToxicMaterial +
+                ", capacity: " + capacity;
+    }
 }

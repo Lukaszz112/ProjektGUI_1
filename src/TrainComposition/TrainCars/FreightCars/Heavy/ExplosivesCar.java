@@ -26,4 +26,11 @@ public class ExplosivesCar extends FreightHeavyCar{
         this.amountOfExplosives = amountOfExplosives;
         this.typeOfExplosives = typeOfExplosives;
     }
+
+    @Override
+    public String toString() {
+        return "Explosives car: " + super.toString() +
+                ", type of explosives: " + typeOfExplosives +
+                ", amount of explosives: " + amountOfExplosives;
+    }
 }

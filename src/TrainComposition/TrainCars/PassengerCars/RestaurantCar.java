@@ -28,4 +28,10 @@ public class RestaurantCar extends PassengerCars implements ElectricCars {
         this.responsibleCompany = responsibleCompany;
     }
 
+    @Override
+    public String toString() {
+        return "Restaurant car: " + super.toString() +
+                ", number of crew: " + numOfCrew +
+                ", responsible company: " + responsibleCompany;
+    }
 }

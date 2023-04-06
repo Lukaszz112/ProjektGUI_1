@@ -26,4 +26,11 @@ public class LiquidGoodsCar extends FreightCars {
         this.liquidComposition = liquidComposition;
         this.trainCarCapacity = trainCarCapacity;
     }
+
+    @Override
+    public String toString() {
+        return "Liquid goods car: " + super.toString() +
+                ", liquid composition: " + liquidComposition +
+                ", train car capacity: " + trainCarCapacity;
+    }
 }
