@@ -1,4 +1,4 @@
-package Route;
+package TrainJourney;
 
 public enum StationData {
     Warszawa_Centralna,

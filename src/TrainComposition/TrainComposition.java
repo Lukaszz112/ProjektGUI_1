@@ -31,7 +31,6 @@ public class TrainComposition {
 
     private int sumOfElectricTrainCars = 0;
 
-
     public TrainComposition(
             Locomotive locomotive
     ) {
@@ -50,15 +49,13 @@ public class TrainComposition {
                 .map(x -> (int) x.getNetWeight())
                 .reduce(0,Integer::sum);
 
-        boolean isPlugged = trainCars.stream()
-                .map(TrainCar::getUid)
-                .anyMatch(tmp -> tmp.equals(trainCar.getUid()));
-
-        if(sumOfElectricTrainCars + 1 > this.locomotive.getNumOfElectricTrainCars()){
-            throw new TooManyElectricCarsException(
-                    "There is too many electric cars in train composition, please remove one to plug another!"
-            );
+        if(trainCar instanceof ElectricCars){
+            if(sumOfElectricTrainCars + 1 > locomotive.getNumOfElectricTrainCars())
+                throw new TooManyElectricCarsException(
+                        "There is too many electric cars in train composition, please remove one to plug another!"
+                );
         }
+
         if(sumOfTrainCarsWeight + trainCar.getNetWeight() > this.locomotive.getTorsion()){
             throw new TooHeavyToGoException(
                     "The car is too heavy to plug! Try another one or change the locomotive!"
@@ -69,11 +66,6 @@ public class TrainComposition {
                     "There is too many cars in train composition, please remove one to plug another!"
             );
         }
-        if(isPlugged){
-            throw new IsAlreadyPluggedException(
-                    "The car is already plugged! Remove first to plug again."
-            );
-        }
 
             trainCars.add(trainCar);
             sumOfElectricTrainCars += trainCar instanceof ElectricCars ? 1 : 0;
@@ -81,16 +73,6 @@ public class TrainComposition {
     }
 
     public void remove(TrainCar trainCar) throws IsNotAlreadyPluggedException {
-        boolean isPlugged = trainCars.stream()
-                .map(TrainCar::getUid)
-                .anyMatch(tmp -> tmp.equals(trainCar.getUid()));
-
-        if(!isPlugged && trainCar == null){
-            throw new IsNotAlreadyPluggedException(
-                    "The car is not already plugged! Plug first to remove again."
-            );
-        }
-
         trainCars.remove(trainCar);
         System.out.println("The Car of id: " + trainCar.getUid() + ", unplugged successfully!");
     }
@@ -102,8 +84,6 @@ public class TrainComposition {
                 "Locomotive: " + locomotive +
                 ", Train Cars (uid): " +
                 (
-                        trainCars == null ?
-                                null :
                                 trainCars.stream()
                                             .map(i -> String.valueOf(i.getUid()))
                                             .collect(Collectors.joining(", "))

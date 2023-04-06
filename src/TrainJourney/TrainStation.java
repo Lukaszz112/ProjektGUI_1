@@ -1,4 +1,4 @@
-package Route;
+package TrainJourney;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -19,5 +19,8 @@ public class TrainStation {
         this.name = name;
     }
 
-
+    @Override
+    public String toString() {
+        return name;
+    }
 }

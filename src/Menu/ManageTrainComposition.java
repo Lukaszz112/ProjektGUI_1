@@ -11,7 +11,12 @@ import java.util.Scanner;
 
 public class ManageTrainComposition implements CorrectType {
     Scanner scan = new Scanner(System.in);
-    public void add(List<TrainComposition> trainCompositionList, List<TrainCar> trainCarList) throws DoesntExist {
+    public void add(
+            List<TrainComposition> trainCompositionList,
+            List<TrainCar> trainCarList
+    ) throws
+            DoesntExist
+    {
 
         System.out.println("====================================");
 
@@ -76,7 +81,12 @@ public class ManageTrainComposition implements CorrectType {
 
     }
 
-    public void remove(List<TrainComposition> trainCompositionList, List<TrainCar> trainCarList) throws IsNotAlreadyPluggedException {
+    public void remove(
+            List<TrainComposition> trainCompositionList,
+            List<TrainCar> trainCarList
+    ) throws
+            IsNotAlreadyPluggedException
+    {
         System.out.println("====================================");
 
         trainCompositionList.stream()
@@ -104,7 +114,9 @@ public class ManageTrainComposition implements CorrectType {
                 .toList();
 
         if(!(localTrainCarList.size() > 0)){
-            throw new IsNotAlreadyPluggedException("Train set does not include any train cars! Please plug first!");
+            throw new IsNotAlreadyPluggedException(
+                    "Train set does not include any train cars! Please plug first!"
+            );
         }
 
         System.out.println("====================================");

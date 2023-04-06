@@ -17,7 +17,7 @@ public class CreateTrainCar {
         System.out.println("Train car created!");
     }
 
-    public void create5traincars(List<TrainCar> trainCarList){
+    public void createTestTraincars(List<TrainCar> trainCarList){
         for (int i = 1; i < 3; i++) {
             trainCarList.add(new PassengerCar(i,String.valueOf(i), i, i, i, i));
             trainCarList.add(new GaseousMaterialsCar(String.valueOf(i),String.valueOf(i), i, i, String.valueOf(i), i));
