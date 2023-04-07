@@ -76,7 +76,24 @@ public class CreateTrainComposition implements CorrectType {
         Random rand = new Random();
 
         for (int i = 0; i < AppConfig.quantityOfTrainSets; i++) {
-            Locomotive locomotive = locomotiveList.get(rand.nextInt(AppConfig.quantityOfLocomotives-1));
+
+            int index;
+            Locomotive locomotive;
+            boolean isLocomotiveAlreadyUsed;
+
+            do {
+                index = rand.nextInt(AppConfig.quantityOfLocomotives-1);
+                locomotive = locomotiveList.get(index);
+
+                isLocomotiveAlreadyUsed = false;
+                for (TrainComposition trainComposition : trainCompositionList) {
+                    if (trainComposition.getLocomotive() == locomotive) {
+                        isLocomotiveAlreadyUsed = true;
+                        break;
+                    }
+                }
+            } while (isLocomotiveAlreadyUsed);
+
             TrainComposition trainComposition = new TrainComposition(locomotive);
             trainCompositionList.add(trainComposition);
 

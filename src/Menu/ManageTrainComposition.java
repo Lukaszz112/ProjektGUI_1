@@ -53,8 +53,6 @@ public class ManageTrainComposition implements CorrectType {
 
         System.out.println("====================================");
         System.out.println("Select train car (index): ");
-        // blad przy podlaczaniu tego samego wagonu do innych skladow pociagu !!!!!!!!!
-        // blad na dzialniach wagonow
 
         int userSelection2;
 
@@ -70,6 +68,7 @@ public class ManageTrainComposition implements CorrectType {
             assert chosenTrainComposition != null;
             chosenTrainComposition.add(chosenTrainCar);
             trainCarList.remove(chosenTrainCar);
+            System.out.println("The Train Car plugged successfully!");
         }catch (
                 TooManyElectricCarsException |
                 TooHeavyToGoException |
@@ -143,6 +142,7 @@ public class ManageTrainComposition implements CorrectType {
             assert chosenTrainComposition != null;
             chosenTrainComposition.remove(chosenTrainCar);
             trainCarList.add(chosenTrainCar);
+            System.out.println("The Train Car unplugged successfully!");
         }catch (IsNotAlreadyPluggedException e) {
             System.out.println(e.getMessage());
         }

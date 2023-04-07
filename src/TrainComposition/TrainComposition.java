@@ -69,12 +69,10 @@ public class TrainComposition {
 
             trainCars.add(trainCar);
             sumOfElectricTrainCars += trainCar instanceof ElectricCars ? 1 : 0;
-            System.out.println("The Car of id: " + trainCar.getUid() + ", plugged successfully!");
     }
 
     public void remove(TrainCar trainCar) throws IsNotAlreadyPluggedException {
         trainCars.remove(trainCar);
-        System.out.println("The Car of id: " + trainCar.getUid() + ", unplugged successfully!");
     }
 
 
