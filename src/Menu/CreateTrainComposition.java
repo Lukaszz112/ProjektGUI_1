@@ -4,10 +4,17 @@ import Menu.Exception.DoesntExist;
 import Menu.Exception.ThereIsNoSuchLocomotiveYet;
 import Menu.Exception.ThisLocomotiveIsAlreadyUsed;
 import Menu.Interfaces.CorrectType;
+import TrainComposition.Exceptions.IsAlreadyPluggedException;
+import TrainComposition.Exceptions.TooHeavyToGoException;
+import TrainComposition.Exceptions.TooManyCarsException;
+import TrainComposition.Exceptions.TooManyElectricCarsException;
 import TrainComposition.Locomotive.Locomotive;
+import TrainComposition.TrainCars.Abstract.TrainCar;
 import TrainComposition.TrainComposition;
+import TrainJourney.TrainStation;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class CreateTrainComposition implements CorrectType {
@@ -54,5 +61,30 @@ public class CreateTrainComposition implements CorrectType {
 
         trainCompositionList.add(new TrainComposition(locomotiveToAdd));
         System.out.println("Train composition created!");
+    }
+
+    public void createTestTrainComposition(
+            List<Locomotive> locomotiveList,
+            List<TrainCar> trainCarList,
+            List<TrainComposition> trainCompositionList
+    ) throws
+            TooManyElectricCarsException,
+            TooHeavyToGoException,
+            TooManyCarsException,
+            IsAlreadyPluggedException
+    {
+        Random rand = new Random();
+
+        for (int i = 0; i < AppConfig.quantityOfTrainSets; i++) {
+            Locomotive locomotive = locomotiveList.get(rand.nextInt(AppConfig.quantityOfLocomotives-1));
+            TrainComposition trainComposition = new TrainComposition(locomotive);
+            trainCompositionList.add(trainComposition);
+
+            for (int j = 0; j < rand.nextInt(5)+5; j++) {
+                TrainCar trainCar = trainCarList.get(rand.nextInt(AppConfig.quantityOfTrainCars-1));
+                trainComposition.add(trainCar);
+            }
+        }
+
     }
 }

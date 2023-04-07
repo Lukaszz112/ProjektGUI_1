@@ -48,9 +48,9 @@ public class CreateLocomotive implements CorrectType{
                     new Locomotive(
                             "Locomotive " + i,
                             StationData.values()[i],
-                            rand.nextInt(20)+5,
+                            rand.nextInt(25)+10,
                             rand.nextInt(10)+5,
-                            rand.nextInt(10000)+5000)
+                            rand.nextInt(10000)+14000)
             );
         }
     }

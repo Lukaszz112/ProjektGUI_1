@@ -23,7 +23,7 @@ public class CreateMenuInit implements CorrectType {
     public void initialize(){
         Scanner scan = new Scanner(System.in);
 
-        new TestObj().create(trainStationList,locomotiveList,trainCarList);
+        new TestObj().create(trainStationList,locomotiveList,trainCarList,trainCompositionList);
 
         int userSelection;
 
