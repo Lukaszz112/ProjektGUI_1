@@ -5,6 +5,7 @@ import Menu.Exception.ThereIsNoSuchLocomotiveYet;
 import Menu.Exception.ThisLocomotiveIsAlreadyUsed;
 import Menu.Exception.TrainStationExist;
 import Menu.Interfaces.CorrectType;
+import Menu.TrainCompositionManagement.ManageTrainCompositionInit;
 import TrainJourney.TrainStation;
 import TrainComposition.Locomotive.Locomotive;
 import TrainComposition.TrainCars.Abstract.TrainCar;
@@ -61,7 +62,7 @@ public class CreateMenuInit implements CorrectType {
                     }
                     break;
                 case 6:
-                    trainCompositionList.stream().map(TrainComposition::toString).forEach(System.out::println);
+                    new ManageTrainCarLoadsInit().initialize(trainCompositionList);
                     break;
                 case 7:
                     //Remove train Set from the route

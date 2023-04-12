@@ -1,4 +1,4 @@
-package Menu;
+package Menu.TrainCompositionManagement;
 
 import Menu.Exception.DoesntExist;
 import Menu.Interfaces.CorrectType;

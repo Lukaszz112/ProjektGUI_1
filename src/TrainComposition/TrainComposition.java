@@ -68,6 +68,7 @@ public class TrainComposition {
         }
 
             trainCars.add(trainCar);
+            locomotive.setAvailableWeightOfLoads(locomotive.getAvailableWeightOfLoads() - trainCar.getNetWeight());
             sumOfElectricTrainCars += trainCar instanceof ElectricCars ? 1 : 0;
     }
 

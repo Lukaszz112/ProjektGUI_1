@@ -3,11 +3,7 @@ package TrainJourney;
 import java.util.*;
 
 public class RouteGraph {
-    private Map<TrainStation, List<Edge>> journeyGraph = new HashMap<>();
-
-    public Map<TrainStation, List<Edge>> getJourneyGraph() {
-        return journeyGraph;
-    }
+    private final Map<TrainStation, List<Edge>> journeyGraph = new HashMap<>();
 
     public List<Edge> getNeighbors(TrainStation vertex) {
         return journeyGraph.get(vertex);
@@ -83,7 +79,4 @@ public class RouteGraph {
             return destination.toString() + " -> " + distance;
         }
     }
-
-
-
 }

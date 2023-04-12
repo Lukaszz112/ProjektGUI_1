@@ -1,7 +1,8 @@
-package Menu;
+package Menu.TrainCompositionManagement;
 
 import Menu.Exception.DoesntExist;
 import Menu.Interfaces.CorrectType;
+import Menu.TrainCompositionManagement.ManageTrainComposition;
 import TrainComposition.Exceptions.IsNotAlreadyPluggedException;
 import TrainComposition.TrainCars.Abstract.TrainCar;
 import TrainComposition.TrainComposition;

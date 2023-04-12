@@ -8,6 +8,7 @@ public class Locomotive{
     private final int numOfTrainCars;
     private final int numOfElectricTrainCars;
     private final double torsion;
+    private double availableWeightOfLoads;
     private final String name;
     private final StationData homeStation;
 //    private String startingStation;
@@ -30,6 +31,12 @@ public class Locomotive{
     public double getTorsion() {
         return torsion;
     }
+    public double getAvailableWeightOfLoads() {
+        return availableWeightOfLoads;
+    }
+    public void setAvailableWeightOfLoads(double availableWeightOfLoads) {
+        this.availableWeightOfLoads = availableWeightOfLoads;
+    }
 
     public Locomotive(
             String name,
@@ -43,6 +50,7 @@ public class Locomotive{
         this.numOfElectricTrainCars = numOfElectricTrainCars;
         this.numOfTrainCars = numOfTrainCars;
         this.torsion = torsion;
+        this.availableWeightOfLoads = torsion;
         this.uid = count.incrementAndGet();
     }
 
@@ -54,4 +62,6 @@ public class Locomotive{
                 ", maximum weight of train cars: " + torsion +
                 ", name: " + name;
     }
+
+
 }
