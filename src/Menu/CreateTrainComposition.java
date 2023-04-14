@@ -11,6 +11,7 @@ import TrainComposition.Exceptions.TooManyElectricCarsException;
 import TrainComposition.Locomotive.Locomotive;
 import TrainComposition.TrainCars.Abstract.TrainCar;
 import TrainComposition.TrainComposition;
+import TrainJourney.RouteGraph;
 
 import java.util.List;
 import java.util.Random;
@@ -20,7 +21,8 @@ public class CreateTrainComposition implements CorrectType {
     Scanner scan = new Scanner(System.in);
     public void initialize(
             List<TrainComposition> trainCompositionList,
-            List<Locomotive> locomotiveList
+            List<Locomotive> locomotiveList,
+            RouteGraph graph
     ) throws
             ThereIsNoSuchLocomotiveYet,
             ThisLocomotiveIsAlreadyUsed, DoesntExist {
@@ -58,14 +60,15 @@ public class CreateTrainComposition implements CorrectType {
             );
         }
 
-        trainCompositionList.add(new TrainComposition(locomotiveToAdd));
+        trainCompositionList.add(new TrainComposition(locomotiveToAdd,graph));
         System.out.println("Train composition created!");
     }
 
     public void createTestTrainComposition(
             List<Locomotive> locomotiveList,
             List<TrainCar> trainCarList,
-            List<TrainComposition> trainCompositionList
+            List<TrainComposition> trainCompositionList,
+            RouteGraph graph
     ) throws
             TooManyElectricCarsException,
             TooHeavyToGoException,
@@ -93,7 +96,7 @@ public class CreateTrainComposition implements CorrectType {
                 }
             } while (isLocomotiveAlreadyUsed);
 
-            TrainComposition trainComposition = new TrainComposition(locomotive);
+            TrainComposition trainComposition = new TrainComposition(locomotive,graph);
             trainCompositionList.add(trainComposition);
 
             for (int j = 0; j < rand.nextInt(5)+5; j++) {

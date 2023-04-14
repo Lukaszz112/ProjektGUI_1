@@ -1,7 +1,9 @@
 package TrainComposition.Locomotive;
 
 import TrainJourney.StationData;
+import TrainJourney.TrainStation;
 
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Locomotive{
@@ -10,12 +12,28 @@ public class Locomotive{
     private final double torsion;
     private double availableWeightOfLoads;
     private final String name;
-    private final StationData homeStation;
-//    private String startingStation;
-//    private String finalStation;
-//    private double speed;
+    private final TrainStation homeStation;
+    private TrainStation startingStation;
+    private TrainStation finalStation;
+    private double speed;
     private final int uid;
     private static final AtomicInteger count = new AtomicInteger(0);
+
+    public void setStartingStation(TrainStation startingStation) {
+        this.startingStation = startingStation;
+    }
+
+    public void setFinalStation(TrainStation finalStation) {
+        this.finalStation = finalStation;
+    }
+
+    public TrainStation getStartingStation() {
+        return startingStation;
+    }
+
+    public TrainStation getFinalStation() {
+        return finalStation;
+    }
 
     public int getUid() {
         return uid;
@@ -38,13 +56,22 @@ public class Locomotive{
         this.availableWeightOfLoads = availableWeightOfLoads;
     }
 
+    public double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+
     public Locomotive(
             String name,
-            StationData homeStation,
+            TrainStation homeStation,
             int numOfTrainCars,
             int numOfElectricTrainCars,
             double torsion
     ) {
+        Random rand = new Random();
         this.name = name;
         this.homeStation = homeStation;
         this.numOfElectricTrainCars = numOfElectricTrainCars;
@@ -52,6 +79,7 @@ public class Locomotive{
         this.torsion = torsion;
         this.availableWeightOfLoads = torsion;
         this.uid = count.incrementAndGet();
+        this.speed = rand.nextDouble(120)+60;
     }
 
     @Override

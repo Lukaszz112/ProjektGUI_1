@@ -1,5 +1,7 @@
 package TrainJourney;
 
+import TrainComposition.TrainComposition;
+
 import java.util.*;
 
 public class RouteGraph {
@@ -10,6 +12,44 @@ public class RouteGraph {
     }
     public void addVertex(TrainStation vertex) {
         journeyGraph.put(vertex, new ArrayList<>());
+    }
+
+    public Map<TrainStation, List<Edge>> getJourneyGraph() {
+        return journeyGraph;
+    }
+
+    public List<TrainStation> findPath(TrainStation start, TrainStation end) {
+        Stack<TrainStation> stack = new Stack<>();
+        Set<TrainStation> visited = new HashSet<>();
+        Map<TrainStation, TrainStation> parentMap = new HashMap<>();
+
+        stack.push(start);
+        visited.add(start);
+
+        while (!stack.isEmpty()) {
+            TrainStation current = stack.pop();
+
+            if (current.equals(end)) {
+                List<TrainStation> path = new ArrayList<>();
+                TrainStation node = end;
+                while (node != null) {
+                    path.add(0, node);
+                    node = parentMap.get(node);
+                }
+                return path;
+            }
+
+            for (Edge edge : getNeighbors(current)) {
+                TrainStation neighbor = edge.getDestination();
+                if (!visited.contains(neighbor)) {
+                    stack.push(neighbor);
+                    visited.add(neighbor);
+                    parentMap.put(neighbor, current);
+                }
+            }
+        }
+
+        return null;
     }
 
     public void addEdge(TrainStation stationA, TrainStation stationB, int distance) {
@@ -61,12 +101,20 @@ public class RouteGraph {
         }
     }
 
-    private static class Edge {
+    public class Edge {
+
+        //globalna lista do przechowywania stanu edga
         TrainStation destination;
         int distance;
 
+        TrainComposition trainComposition;
+
         public TrainStation getDestination() {
             return destination;
+        }
+
+        public int getDistance() {
+            return distance;
         }
 
         public Edge(TrainStation destination, int distance) {
@@ -76,7 +124,7 @@ public class RouteGraph {
 
         @Override
         public String toString(){
-            return destination.toString() + " -> " + distance;
+            return " -> " + destination.toString() + " "  + distance;
         }
     }
 }

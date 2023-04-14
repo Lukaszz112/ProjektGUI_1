@@ -1,9 +1,14 @@
 package TrainJourney;
 
+import TrainComposition.TrainComposition;
+
+import java.util.Queue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class TrainStation {
     private String name;
+
+    private Queue<TrainComposition> queue;
     private int uid;
     private static final AtomicInteger count = new AtomicInteger(0);
 
