@@ -98,7 +98,7 @@ public class Locomotive{
         this.torsion = torsion;
         this.availableWeightOfLoads = torsion;
         this.uid = count.incrementAndGet();
-        this.speed = rand.nextDouble(120)+60;
+        this.speed = rand.nextDouble(90)+60;
     }
 
 

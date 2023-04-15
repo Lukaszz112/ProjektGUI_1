@@ -23,10 +23,16 @@ public class FileWrite implements Runnable{
                         new FileWriter("trainStateInfo.txt")
                 );
                 String a = trainCompositionList.stream()
-                        .sorted(Comparator.comparing(x ->((TrainComposition) x).getLocomotive().getJourneyPercent()).reversed())
+                        .filter(x -> x.getLocomotive().getFinalStation() != null)
+                        .sorted(Comparator.comparing(x ->x.getLocomotive().getJourneyPercent()))
                         .map(info::trainCompositionInfo)
                         .collect(Collectors.joining("\n"));
-                writer.write(a);
+                String b = trainCompositionList.stream()
+                        .filter(x -> x.getLocomotive().getFinalStation() == null)
+                        .sorted(Comparator.comparing(x ->x.getLocomotive().getJourneyPercent()))
+                        .map(info::trainCompositionInfo)
+                        .collect(Collectors.joining("\n"));
+                writer.write("Pociągi w podróży: \n" + a + "\n \n Pociągi na parkingu: \n" + b);
                 writer.close();
                 Thread.sleep(5000);
             }catch(IOException | InterruptedException ex) {
