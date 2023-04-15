@@ -10,7 +10,9 @@ import java.util.Scanner;
 
 public class CreateTrainStation implements CorrectType {
     Scanner scan = new Scanner(System.in);
-    public void create(List<TrainStation> trainStationList) throws TrainStationExist {
+    public void create(
+            List<TrainStation> trainStationList
+    ) throws TrainStationExist {
         System.out.println("Insert station name: ");
         String name = scan.next();
 
@@ -28,7 +30,9 @@ public class CreateTrainStation implements CorrectType {
         System.out.println("Train station created!");
     }
 
-    public void createTestStation(List<TrainStation> trainStationList){
+    public void createTestStation(
+            List<TrainStation> trainStationList
+    ){
         StationData[] trainStationNames = StationData.values();
 
         for (StationData a :

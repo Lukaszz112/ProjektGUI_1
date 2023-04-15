@@ -18,6 +18,7 @@ public class RouteGraph {
         return journeyGraph;
     }
 
+    //Przy pisaniu findPath wspomagałem się informacjami ze strony: https://favtutor.com/blogs/depth-first-search-java
     public List<TrainStation> findPath(TrainStation startStation, TrainStation finalStation) {
         Stack<TrainStation> stack = new Stack<>();
         Set<TrainStation> visited = new HashSet<>();
@@ -106,8 +107,6 @@ public class RouteGraph {
         //globalna lista do przechowywania stanu edga
         TrainStation destination;
         int distance;
-
-        TrainComposition trainComposition;
 
         public TrainStation getDestination() {
             return destination;

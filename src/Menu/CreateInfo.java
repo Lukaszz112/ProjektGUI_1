@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class CreateInfo {
     ChooseManagement chooseManagement = new ChooseManagement();
 
-    public String trainComposition(TrainComposition trainComposition) {
+    public String trainCompositionInfo(TrainComposition trainComposition) {
         return trainComposition.getLocomotive().getFinalStation() == null ?
                 "====================================================================================" +
                         "\n" + trainComposition.getUid() + ". Train Composition includes: " +
@@ -21,14 +21,14 @@ public class CreateInfo {
                                             String loadInfo = trainCar.getLoadList().stream()
                                                     .map(Load::toString)
                                                     .collect(Collectors.joining(", "));
-                                            return trainCar.getUid() + (loadInfo.isEmpty() ? ": No load" : ": " + loadInfo);
+                                            return trainCar.getUid() + (loadInfo.equals("") ? ": No load" : ": " + loadInfo);
                                         })
                                         .collect(Collectors.joining(", \n       "))
                         ) +
                         "\n State: " +
                         "\n     On parking" +
-                        "====================================================================================" :
-                "====================================================================================" +
+                        "\n====================================================================================" :
+                        "====================================================================================" +
                         "\n" + trainComposition.getUid() + ". Train Composition includes: " +
                         " \n Locomotive: " + trainComposition.getLocomotive()  +
                         "\n Train Cars (uid): " +
@@ -38,7 +38,7 @@ public class CreateInfo {
                                             String loadInfo = trainCar.getLoadList().stream()
                                                     .map(Load::toString)
                                                     .collect(Collectors.joining(", "));
-                                            return trainCar.getUid() + (loadInfo.isEmpty() ? ": No load" : ": " + loadInfo);
+                                            return trainCar.getUid() + (loadInfo.equals("") ? ": No load" : ": " + loadInfo);
                                         })
                                         .collect(Collectors.joining(", \n     "))
                         ) +
@@ -55,6 +55,6 @@ public class CreateInfo {
                 trainCompositionList
         );
 
-        System.out.println(trainComposition(trainComposition));
+        System.out.println(trainCompositionInfo(trainComposition));
     }
 }

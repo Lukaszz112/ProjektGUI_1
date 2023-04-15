@@ -5,14 +5,11 @@ import TrainComposition.Exceptions.*;
 import TrainComposition.Locomotive.Locomotive;
 import TrainComposition.TrainCars.Interfaces.ElectricCars;
 import TrainComposition.TrainCars.Abstract.TrainCar;
-import TrainComposition.TrainCars.Load;
 import TrainJourney.RouteGraph;
 import TrainJourney.TrainStation;
-import com.sun.source.doctree.StartElementTree;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class TrainComposition implements Runnable, CorrectType {
@@ -35,15 +32,31 @@ public class TrainComposition implements Runnable, CorrectType {
         return trainCars;
     }
 
+    private List<RouteGraph.Edge> busyEdgeList;
+    private final String monitor;
+
+    public void setReadyToGo(boolean readyToGo) {
+        this.readyToGo = readyToGo;
+    }
+
+    private boolean readyToGo = true;
+    public boolean isReadyToGo() {
+        return readyToGo;
+    }
+
     private int sumOfElectricTrainCars = 0;
 
     Random rand = new Random();
     public TrainComposition(
             Locomotive locomotive,
-            RouteGraph graph
+            RouteGraph graph,
+            List<RouteGraph.Edge> busyEdgeList,
+            String monitor
     ) {
         this.locomotive = locomotive;
         this.graph = graph;
+        this.busyEdgeList = busyEdgeList;
+        this.monitor = monitor;
     }
 
     public void add(TrainCar trainCar) throws
@@ -94,6 +107,8 @@ public class TrainComposition implements Runnable, CorrectType {
                 ", sumOfElectricTrainCars=" + sumOfElectricTrainCars;
     }
 
+
+
     @Override
     public void run() {
         while(true){
@@ -126,6 +141,41 @@ public class TrainComposition implements Runnable, CorrectType {
                         .orElse(null);
 
                 assert nextStation != null;
+                List<RouteGraph.Edge> reverseNeighbors = graph.getNeighbors(nextStation.getDestination());
+                RouteGraph.Edge reverseEdge = reverseNeighbors.stream()
+                        .filter(x -> x.getDestination() == path.get(finalI))
+                        .findFirst()
+                        .orElse(null);
+
+                synchronized (monitor) {
+                    while (true) {
+                        RouteGraph.Edge usingEdge = busyEdgeList.stream()
+                                .filter(x -> x == reverseEdge || x == nextStation)
+                                .findAny()
+                                .orElse(null);
+
+                        if (usingEdge == null) {
+                            break;
+                        }
+
+                        try {
+                            System.out.println(
+                                    "Train: " + this.getUid() +
+                                    " is waiting in queue at station: " + path.get(i).getName()
+                            );
+
+                            path.get(i).getQueue().add(this);
+                            monitor.wait();
+
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    readyToGo = true;
+                    busyEdgeList.add(reverseEdge);
+                    busyEdgeList.add(nextStation);
+                }
 
                 double distance = nextStation.getDistance();
                 double distanceToNextStation = nextStation.getDistance() * 1000; //change type km -> m
@@ -160,6 +210,20 @@ public class TrainComposition implements Runnable, CorrectType {
 
                 }while(distanceToNextStation > 0);
 
+                synchronized (monitor) {
+                    busyEdgeList.remove(reverseEdge);
+                    busyEdgeList.remove(nextStation);
+
+                    if (path.get(i).getQueue().size() > 0) {
+                        TrainComposition nextTrain = path.get(i).getQueue().get(0);
+
+                        nextTrain.setReadyToGo(true);
+                        path.get(i).getQueue().remove(0);
+
+                        monitor.notifyAll();
+                    }
+                }
+
                 try{
                     Thread.sleep(2000);
                 }catch (InterruptedException e){
@@ -176,15 +240,5 @@ public class TrainComposition implements Runnable, CorrectType {
             locomotive.setStartingStation(finalStation);
             locomotive.setFinalStation(startStation);
         }
-
-        //sprawdzenie czy trasa jest zajeta, globalna lista krawedzi
-        //zapis i odczyt z listy / sekcja krytyczna
-        //DODAC PROCENT TRASY OD STACJI
-
-        //                   zamiast do while
-//                    ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-//                    scheduler.scheduleAtFixedRate(() -> {
-//                        // ...
-//                    }, 0, 1, TimeUnit.SECONDS);
     }
 }

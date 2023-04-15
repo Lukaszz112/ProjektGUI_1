@@ -21,16 +21,26 @@ import java.util.Scanner;
 public class CreateMenuInit implements CorrectType {
     private final List<Locomotive> locomotiveList = new ArrayList<>();
     private final List<Thread> threadList = new ArrayList<>();
+    private final List<RouteGraph.Edge> busyEdgeList = new ArrayList<>();
     private final List<TrainComposition> runningTrainCompositionList = new ArrayList<>();
     private final List<TrainComposition> trainCompositionList = new ArrayList<>();
     private final List<TrainCar> trainCarList = new ArrayList<>();
     private final List<TrainStation> trainStationList = new ArrayList<>();
     private final RouteGraph graph = new RouteGraph();
+    private final String monitor = new String();
 
     public void initialize(){
         Scanner scan = new Scanner(System.in);
 
-        new TestObj().create(trainStationList,locomotiveList,trainCarList,trainCompositionList,graph);
+        new TestObj().create(
+                trainStationList,
+                locomotiveList,
+                trainCarList,
+                trainCompositionList,
+                graph,
+                busyEdgeList,
+                monitor
+        );
         graph.automaticAddStation(trainStationList);
         graph.automaticAddEdge(trainStationList);
 
@@ -48,7 +58,9 @@ public class CreateMenuInit implements CorrectType {
                         new CreateTrainComposition().initialize(
                                 trainCompositionList,
                                 locomotiveList,
-                                graph
+                                graph,
+                                busyEdgeList,
+                                monitor
                         );
                     }catch (ThisLocomotiveIsAlreadyUsed | ThereIsNoSuchLocomotiveYet | DoesntExist e){
                         System.out.println(e.getMessage());

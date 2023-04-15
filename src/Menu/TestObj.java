@@ -23,7 +23,9 @@ public class TestObj {
             List<Locomotive> locomotiveList,
             List<TrainCar> trainCarList,
             List<TrainComposition> trainCompositionList,
-            RouteGraph graph
+            RouteGraph graph,
+            List<RouteGraph.Edge> busyEdgeList,
+            String monitor
     ){
         new CreateTrainStation().createTestStation(trainStationList);
         new CreateLocomotive().createTestLocomotives(locomotiveList,trainStationList);
@@ -34,7 +36,9 @@ public class TestObj {
                     locomotiveList,
                     trainCarList,
                     trainCompositionList,
-                    graph
+                    graph,
+                    busyEdgeList,
+                    monitor
             );
         }catch (
                 TooManyElectricCarsException |
@@ -45,6 +49,7 @@ public class TestObj {
             System.out.println(e.getMessage());
         }
 
+        // Wypisanie grafu
 //        List<TrainStation> path = graph.findPath(trainStationList.get(5), trainStationList.get(82));
 //        System.out.println(trainStationList.get(5) + "  " + trainStationList.get(82));
 //

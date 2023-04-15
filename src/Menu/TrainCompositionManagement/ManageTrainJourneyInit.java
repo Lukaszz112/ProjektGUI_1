@@ -2,6 +2,7 @@ package Menu.TrainCompositionManagement;
 
 import Menu.Interfaces.CorrectType;
 import TrainComposition.TrainComposition;
+import TrainJourney.RouteGraph;
 import TrainJourney.TrainStation;
 
 import java.util.List;
