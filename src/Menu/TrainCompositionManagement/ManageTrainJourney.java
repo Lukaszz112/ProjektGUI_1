@@ -1,5 +1,6 @@
-package Menu;
+package Menu.TrainCompositionManagement;
 
+import Menu.ChooseManagement;
 import TrainComposition.TrainComposition;
 import TrainJourney.RouteGraph;
 import TrainJourney.TrainStation;
@@ -29,6 +30,10 @@ public class ManageTrainJourney {
 
         Thread thread = new Thread(trainComposition);
         thread.start();
+
+        threadList.add(thread);
+
+        runningTrainCompositionList.add(trainComposition);
     }
 
     public void stop(){

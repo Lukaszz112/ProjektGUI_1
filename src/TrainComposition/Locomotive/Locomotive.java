@@ -16,6 +16,18 @@ public class Locomotive{
     private TrainStation startingStation;
     private TrainStation finalStation;
     private double speed;
+
+    private double journeyPercent = 0;
+    private double toStationPercent = 0;
+
+    public void setJourneyPercent(double journeyPercent) {
+        this.journeyPercent = journeyPercent;
+    }
+
+    public void setToStationPercent(double toStationPercent) {
+        this.toStationPercent = toStationPercent;
+    }
+
     private final int uid;
     private static final AtomicInteger count = new AtomicInteger(0);
 
@@ -25,6 +37,13 @@ public class Locomotive{
 
     public void setFinalStation(TrainStation finalStation) {
         this.finalStation = finalStation;
+    }
+    public double getJourneyPercent() {
+        return journeyPercent;
+    }
+
+    public double getToStationPercent() {
+        return toStationPercent;
     }
 
     public TrainStation getStartingStation() {
@@ -82,13 +101,18 @@ public class Locomotive{
         this.speed = rand.nextDouble(120)+60;
     }
 
+
+
     @Override
     public String toString() {
         return  "Uid: " + uid +
                 ", maximum quantity of train cars: " + numOfTrainCars +
                 ", maximum quantity of electric train cars: " + numOfElectricTrainCars +
                 ", maximum weight of train cars: " + torsion +
-                ", name: " + name;
+                ", name: " + name +
+                ", home station: " + homeStation +
+                ", start station: " + startingStation +
+                ", final station: " + finalStation;
     }
 
 

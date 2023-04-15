@@ -18,20 +18,20 @@ public class RouteGraph {
         return journeyGraph;
     }
 
-    public List<TrainStation> findPath(TrainStation start, TrainStation end) {
+    public List<TrainStation> findPath(TrainStation startStation, TrainStation finalStation) {
         Stack<TrainStation> stack = new Stack<>();
         Set<TrainStation> visited = new HashSet<>();
         Map<TrainStation, TrainStation> parentMap = new HashMap<>();
 
-        stack.push(start);
-        visited.add(start);
+        stack.push(startStation);
+        visited.add(startStation);
 
         while (!stack.isEmpty()) {
             TrainStation current = stack.pop();
 
-            if (current.equals(end)) {
+            if (current.equals(finalStation)) {
                 List<TrainStation> path = new ArrayList<>();
-                TrainStation node = end;
+                TrainStation node = finalStation;
                 while (node != null) {
                     path.add(0, node);
                     node = parentMap.get(node);
@@ -72,7 +72,7 @@ public class RouteGraph {
         for (TrainStation trainStation :
                 stationData) {
             int index = rand.nextInt(100);
-            int distance = rand.nextInt(200)+1;
+            int distance = rand.nextInt(5)+1;
             for (int i = 0; i < 2; i++) {
                 if(i==0){
                     this.addEdge(

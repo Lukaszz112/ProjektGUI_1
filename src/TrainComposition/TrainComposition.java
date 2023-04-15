@@ -5,16 +5,15 @@ import TrainComposition.Exceptions.*;
 import TrainComposition.Locomotive.Locomotive;
 import TrainComposition.TrainCars.Interfaces.ElectricCars;
 import TrainComposition.TrainCars.Abstract.TrainCar;
+import TrainComposition.TrainCars.Load;
 import TrainJourney.RouteGraph;
 import TrainJourney.TrainStation;
 import com.sun.source.doctree.StartElementTree;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class TrainComposition implements Runnable, CorrectType {
 
@@ -88,14 +87,11 @@ public class TrainComposition implements Runnable, CorrectType {
 
     @Override
     public String toString() {
-        return uid + ". Train Composition includes: " +
-                "Locomotive: " + locomotive +
-                ", Train Cars (uid): " +
-                (
-                                trainCars.stream()
-                                            .map(i -> String.valueOf(i.getUid()))
-                                            .collect(Collectors.joining(", "))
-                );
+        return "Uid: " + uid +
+                ". TrainComposition: " +
+                ", locomotive: " + locomotive +
+                ", train cars: " + trainCars +
+                ", sumOfElectricTrainCars=" + sumOfElectricTrainCars;
     }
 
     @Override
@@ -105,26 +101,36 @@ public class TrainComposition implements Runnable, CorrectType {
             TrainStation finalStation = getLocomotive().getFinalStation();
             Locomotive locomotive = getLocomotive();
 
-            assert startStation != null;
-            assert finalStation != null;
-            assert locomotive != null;
-
             List<TrainStation> path = graph.findPath(startStation,finalStation);
 
+            double routeDistance = IntStream.range(0, path.size() - 1)
+                    .mapToObj(i -> graph.getNeighbors(path.get(i))
+                            .stream()
+                            .filter(x -> x.getDestination() == path.get(i + 1))
+                            .findFirst()
+                            .orElse(null))
+                    .filter(Objects::nonNull)
+                    .mapToInt(RouteGraph.Edge::getDistance)
+                    .sum();
+
+            double routeTraveled = 0;
+
             for (int i = 0; i < path.size()-1; i++) {
-                List<RouteGraph.Edge> a = graph.getNeighbors(path.get(i));
+                List<RouteGraph.Edge> neighbors = graph.getNeighbors(path.get(i));
 
                 int finalI = i;
 
-                RouteGraph.Edge tempEdge = a.stream()
+                RouteGraph.Edge nextStation = neighbors.stream()
                         .filter(x -> x.getDestination() == path.get(finalI+1))
                         .findFirst()
                         .orElse(null);
 
-                int distance = tempEdge.getDistance() * 1000; //change type km -> m
-                int routeTraveled = 0;
+                assert nextStation != null;
 
-                path.forEach(x -> System.out.println(x + " "));
+                double distance = nextStation.getDistance();
+                double distanceToNextStation = nextStation.getDistance() * 1000; //change type km -> m
+                double traveledToStation = 0;
+
                 do{
                     locomotive.setSpeed(
                             rand.nextBoolean() ?
@@ -132,33 +138,34 @@ public class TrainComposition implements Runnable, CorrectType {
                                     locomotive.getSpeed() * 0.97
                     );
 
-                    distance -= routeTraveled;
-                    routeTraveled += distance / (locomotive.getSpeed()/3.6);
-                    //predkosc przyspieszona na potrzeby symulacji
+                    double traveled = locomotive.getSpeed()/3.6;
+                    distanceToNextStation -= traveled;
+
+                    double traveledToStation1 = distanceToNextStation < 0 ?
+                            traveled + distanceToNextStation :
+                            traveled;
+
+                    traveledToStation += traveledToStation1;
+
+                    routeTraveled += traveledToStation1;
 
                     try{
-                        Thread.sleep(1000);
+                        Thread.sleep(100);
                     }catch (InterruptedException e){
                         e.printStackTrace();
                     }
 
-//                   zamiast do while
-//                    ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-//                    scheduler.scheduleAtFixedRate(() -> {
-//                        // ...
-//                    }, 0, 1, TimeUnit.SECONDS);
+                    locomotive.setJourneyPercent(((routeTraveled/1000)/routeDistance)*100);
+                    locomotive.setToStationPercent(((traveledToStation/1000)/distance)*100);
 
-                }while(distance >= 0);
+                }while(distanceToNextStation > 0);
 
-                System.out.println("You have arrived to station: " + path.get(i+1));
                 try{
                     Thread.sleep(2000);
                 }catch (InterruptedException e){
                     e.printStackTrace();
                 }
             }
-
-            System.out.println("You have arrived to final station: " + path.get(path.size()-1));
 
             try{
                 Thread.sleep(30000);
@@ -170,10 +177,14 @@ public class TrainComposition implements Runnable, CorrectType {
             locomotive.setFinalStation(startStation);
         }
 
-
-        //while true
         //sprawdzenie czy trasa jest zajeta, globalna lista krawedzi
         //zapis i odczyt z listy / sekcja krytyczna
+        //DODAC PROCENT TRASY OD STACJI
 
+        //                   zamiast do while
+//                    ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+//                    scheduler.scheduleAtFixedRate(() -> {
+//                        // ...
+//                    }, 0, 1, TimeUnit.SECONDS);
     }
 }
