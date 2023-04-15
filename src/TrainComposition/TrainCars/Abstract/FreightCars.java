@@ -8,10 +8,8 @@ public abstract class FreightCars extends TrainCar {
             String sender,
             double netWeight,
             double grossWeight,
-            TrainCarFreightType typeOfGoods
-    ) {
+            TrainCarFreightType baggageMailCar) {
         super(
-                security,
                 netWeight,
                 grossWeight
         );

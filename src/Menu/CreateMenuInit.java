@@ -27,11 +27,11 @@ public class CreateMenuInit implements CorrectType {
     private final List<TrainCar> trainCarList = new ArrayList<>();
     private final List<TrainStation> trainStationList = new ArrayList<>();
     private final RouteGraph graph = new RouteGraph();
-    private final String monitor = new String();
 
     public void initialize(){
         Scanner scan = new Scanner(System.in);
 
+        String monitor = "";
         new TestObj().create(
                 trainStationList,
                 locomotiveList,
@@ -90,12 +90,10 @@ public class CreateMenuInit implements CorrectType {
                             threadList,
                             trainStationList
                     );
-                case 8 -> {
-                    new CreateInfo().show(trainCompositionList);
-                }
-                case 9 -> {
-                    System.out.println("A");
-                }
+                case 8 -> new CreateInfo().show(trainCompositionList);
+
+                case 9 -> System.out.println("A");
+
                 case 0 -> System.exit(0);
                 default -> System.out.println("Please insert correct option!");
             }

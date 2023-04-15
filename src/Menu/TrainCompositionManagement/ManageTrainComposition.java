@@ -61,7 +61,6 @@ public class ManageTrainComposition implements CorrectType {
         TrainCar chosenTrainCar = chooseManagement.getCorrectTrainCar(localTrainCarList);
 
         try{
-            assert chosenTrainComposition != null;
             chosenTrainComposition.remove(chosenTrainCar);
             trainCarList.add(chosenTrainCar);
             System.out.println("The Train Car unplugged successfully!");

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FileWrite implements Runnable{
-    private List<TrainComposition> trainCompositionList;
+    private final List<TrainComposition> trainCompositionList;
     public FileWrite(List<TrainComposition> trainCompositionList){
         this.trainCompositionList = trainCompositionList;
     }

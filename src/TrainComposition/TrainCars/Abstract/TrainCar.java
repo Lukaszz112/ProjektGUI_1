@@ -34,7 +34,6 @@ public abstract class TrainCar {
     }
 
     public TrainCar(
-            String security,
             double netWeight,
             double grossWeight
     ) {

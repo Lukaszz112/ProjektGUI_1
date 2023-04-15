@@ -2,7 +2,6 @@ package Menu.TrainCompositionManagement;
 
 import Menu.Interfaces.CorrectType;
 import TrainComposition.TrainComposition;
-import TrainJourney.RouteGraph;
 import TrainJourney.TrainStation;
 
 import java.util.List;
@@ -19,7 +18,6 @@ public class ManageTrainJourneyInit implements CorrectType {
 
         System.out.println("=============================");
         System.out.println("= 1. Start journey          =");
-        System.out.println("= 2. Stop journey           =");
         System.out.println("=============================");
 
         int userChoice;
@@ -31,8 +29,7 @@ public class ManageTrainJourneyInit implements CorrectType {
             }
         }while(userChoice > 2 || userChoice < 1);
 
-        switch (userChoice) {
-            case 1 -> {
+            if (userChoice == 1) {
                 new ManageTrainJourney().start(
                         trainCompositionList,
                         runningTrainCompositionList,
@@ -40,9 +37,5 @@ public class ManageTrainJourneyInit implements CorrectType {
                         trainStationList
                 );
             }
-            case 2 -> {
-                new ManageTrainJourney().stop();
-            }
-        }
     }
 }

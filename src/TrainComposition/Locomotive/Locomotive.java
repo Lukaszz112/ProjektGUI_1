@@ -1,6 +1,5 @@
 package TrainComposition.Locomotive;
 
-import TrainJourney.StationData;
 import TrainJourney.TrainStation;
 
 import java.util.Random;

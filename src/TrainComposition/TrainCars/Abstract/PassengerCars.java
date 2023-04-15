@@ -2,21 +2,17 @@ package TrainComposition.TrainCars.Abstract;
 
 public abstract class PassengerCars extends TrainCar{
     private final int numOfSeats;
-    private final TrainCarPassengerType typeOfGoods;
 
     public PassengerCars(
             int numOfSeats,
             String security,
             double netWeight,
-            double grossWeight,
-            TrainCarPassengerType typeOfGoods
+            double grossWeight
     ) {
         super(
-                security,
                 netWeight,
                 grossWeight
         );
-        this.typeOfGoods = typeOfGoods;
         this.numOfSeats = numOfSeats;
     }
     @Override

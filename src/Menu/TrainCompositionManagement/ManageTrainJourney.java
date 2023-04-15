@@ -2,7 +2,6 @@ package Menu.TrainCompositionManagement;
 
 import Menu.ChooseManagement;
 import TrainComposition.TrainComposition;
-import TrainJourney.RouteGraph;
 import TrainJourney.TrainStation;
 
 import java.util.List;
@@ -34,9 +33,5 @@ public class ManageTrainJourney {
         threadList.add(thread);
 
         runningTrainCompositionList.add(trainComposition);
-    }
-
-    public void stop(){
-
     }
 }

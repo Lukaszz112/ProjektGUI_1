@@ -21,7 +21,7 @@ public class TrainComposition implements Runnable, CorrectType {
         return uid;
     }
     private final Locomotive locomotive;
-    private RouteGraph graph;
+    private final RouteGraph graph;
 
     public Locomotive getLocomotive() {
         return locomotive;
@@ -32,7 +32,7 @@ public class TrainComposition implements Runnable, CorrectType {
         return trainCars;
     }
 
-    private List<RouteGraph.Edge> busyEdgeList;
+    private final List<RouteGraph.Edge> busyEdgeList;
     private final String monitor;
 
     public void setReadyToGo(boolean readyToGo) {

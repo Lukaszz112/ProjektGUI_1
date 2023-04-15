@@ -2,7 +2,6 @@ package Menu;
 
 import Menu.Interfaces.CorrectType;
 import TrainComposition.Locomotive.Locomotive;
-import TrainJourney.StationData;
 import TrainJourney.TrainStation;
 
 import java.util.List;
@@ -17,7 +16,6 @@ public class CreateLocomotive implements CorrectType{
     ){
         System.out.println("Enter locomotive name: ");
         String name = scan.next();
-        Random rand = new Random();
 
         System.out.println("Enter maximum quantity of train cars: ");
         int numOfTrainCars = getValue(scan, Integer.class);

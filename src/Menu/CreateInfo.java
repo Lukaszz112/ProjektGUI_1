@@ -1,6 +1,5 @@
 package Menu;
 
-import TrainComposition.TrainCars.Abstract.TrainCar;
 import TrainComposition.TrainCars.Load;
 import TrainComposition.TrainComposition;
 
@@ -25,7 +24,7 @@ public class CreateInfo {
                                                     .map(Load::toString)
                                                     .collect(Collectors.joining(", "));
                                             return trainCar.getUid() + ", weight: "
-                                                    + (double)(trainCar.getWeightOfAllStuff() + trainCar.getNetWeight())
+                                                    + (trainCar.getWeightOfAllStuff() + trainCar.getNetWeight())
                                                     + (loadInfo.equals("") ? ": No load" : ": " + loadInfo);
                                         })
                                         .collect(Collectors.joining(", \n       "))
@@ -45,7 +44,7 @@ public class CreateInfo {
                                                     .map(Load::toString)
                                                     .collect(Collectors.joining(", "));
                                             return trainCar.getUid() + ", weight: "
-                                                    + (double)(trainCar.getWeightOfAllStuff() + trainCar.getNetWeight())
+                                                    + (trainCar.getWeightOfAllStuff() + trainCar.getNetWeight())
                                                     + (loadInfo.equals("") ? ": No load" : ": " + loadInfo);
                                         })
                                         .collect(Collectors.joining(", \n     "))
