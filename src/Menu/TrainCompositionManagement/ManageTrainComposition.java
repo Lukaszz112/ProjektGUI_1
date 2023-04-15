@@ -49,8 +49,7 @@ public class ManageTrainComposition implements CorrectType {
     {
         TrainComposition chosenTrainComposition = chooseManagement.getCorrectTrainComposition(trainCompositionList);
 
-        List<TrainCar> localTrainCarList = trainCompositionList.stream()
-                .flatMap(x -> x.getTrainCars().stream())
+        List<TrainCar> localTrainCarList = chosenTrainComposition.getTrainCars().stream()
                 .toList();
 
         if(!(localTrainCarList.size() > 0)){

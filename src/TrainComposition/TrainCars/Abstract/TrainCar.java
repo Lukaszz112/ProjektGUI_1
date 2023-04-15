@@ -14,6 +14,7 @@ public abstract class TrainCar {
     private static final AtomicInteger count = new AtomicInteger(0);
     private final int uid;
 
+    private double weightOfAllStuff = 0;
     private final List<Load> loadList = new ArrayList<>();
 
     public List<Load> getLoadList() {
@@ -42,6 +43,10 @@ public abstract class TrainCar {
         this.uid = count.incrementAndGet();
     }
 
+    public double getWeightOfAllStuff() {
+        return weightOfAllStuff;
+    }
+
     public void addLoad(
             Locomotive locomotive,
             String nameOfGoods,
@@ -50,7 +55,7 @@ public abstract class TrainCar {
             TooHeavyGoods
     {
 
-        double weightOfAllStuff = loadList.stream()
+        weightOfAllStuff = loadList.stream()
                 .map(Load::getWeight)
                 .reduce(Double::sum)
                 .orElse((double)0);

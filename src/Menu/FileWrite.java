@@ -5,6 +5,7 @@ import TrainComposition.TrainComposition;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,8 +23,9 @@ public class FileWrite implements Runnable{
                         new FileWriter("trainStateInfo.txt")
                 );
                 String a = trainCompositionList.stream()
-                                .map(info::trainCompositionInfo)
-                                .collect(Collectors.joining("\n"));
+                        .sorted(Comparator.comparing(x ->((TrainComposition) x).getLocomotive().getJourneyPercent()).reversed())
+                        .map(info::trainCompositionInfo)
+                        .collect(Collectors.joining("\n"));
                 writer.write(a);
                 writer.close();
                 Thread.sleep(5000);

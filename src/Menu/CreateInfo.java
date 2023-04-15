@@ -1,8 +1,10 @@
 package Menu;
 
+import TrainComposition.TrainCars.Abstract.TrainCar;
 import TrainComposition.TrainCars.Load;
 import TrainComposition.TrainComposition;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,11 +19,14 @@ public class CreateInfo {
                         "\n Train Cars (uid): " +
                         (
                                 trainComposition.getTrainCars().stream()
+                                        .sorted(Comparator.comparing(x -> x.getWeightOfAllStuff() + x.getNetWeight()))
                                         .map(trainCar -> {
                                             String loadInfo = trainCar.getLoadList().stream()
                                                     .map(Load::toString)
                                                     .collect(Collectors.joining(", "));
-                                            return trainCar.getUid() + (loadInfo.equals("") ? ": No load" : ": " + loadInfo);
+                                            return trainCar.getUid() + ", weight: "
+                                                    + (double)(trainCar.getWeightOfAllStuff() + trainCar.getNetWeight())
+                                                    + (loadInfo.equals("") ? ": No load" : ": " + loadInfo);
                                         })
                                         .collect(Collectors.joining(", \n       "))
                         ) +
@@ -34,11 +39,14 @@ public class CreateInfo {
                         "\n Train Cars (uid): " +
                         (
                                 trainComposition.getTrainCars().stream()
+                                        .sorted(Comparator.comparing(x -> x.getWeightOfAllStuff() + x.getNetWeight()))
                                         .map(trainCar -> {
                                             String loadInfo = trainCar.getLoadList().stream()
                                                     .map(Load::toString)
                                                     .collect(Collectors.joining(", "));
-                                            return trainCar.getUid() + (loadInfo.equals("") ? ": No load" : ": " + loadInfo);
+                                            return trainCar.getUid() + ", weight: "
+                                                    + (double)(trainCar.getWeightOfAllStuff() + trainCar.getNetWeight())
+                                                    + (loadInfo.equals("") ? ": No load" : ": " + loadInfo);
                                         })
                                         .collect(Collectors.joining(", \n     "))
                         ) +

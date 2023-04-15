@@ -103,7 +103,8 @@ public class TrainComposition implements Runnable, CorrectType {
         return "Uid: " + uid +
                 ". TrainComposition: " +
                 ", locomotive: " + locomotive +
-                ", train cars: " + trainCars +
+                ", train cars: " + trainCars.stream()
+                                        .sorted(Comparator.comparing(x -> x.getWeightOfAllStuff() + x.getNetWeight())) +
                 ", sumOfElectricTrainCars=" + sumOfElectricTrainCars;
     }
 
@@ -166,7 +167,6 @@ public class TrainComposition implements Runnable, CorrectType {
 
                             path.get(i).getQueue().add(this);
                             monitor.wait();
-
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -182,6 +182,14 @@ public class TrainComposition implements Runnable, CorrectType {
                 double traveledToStation = 0;
 
                 do{
+                    if(locomotive.getSpeed() > 200){
+                        try {
+                            throw new RailroadHazard(this.toString());
+                        } catch (RailroadHazard e) {
+                            System.out.println("The train has exceeded the speed limit: \n" + e);
+                        }
+                    }
+
                     locomotive.setSpeed(
                             rand.nextBoolean() ?
                                     locomotive.getSpeed() * 1.03 :
