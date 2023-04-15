@@ -44,6 +44,9 @@ public class CreateMenuInit implements CorrectType {
         graph.automaticAddStation(trainStationList);
         graph.automaticAddEdge(trainStationList);
 
+        Thread thread = new Thread(new FileWrite(trainCompositionList));
+        thread.start();
+
         int userSelection;
 
         do {
