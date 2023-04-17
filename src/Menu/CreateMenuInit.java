@@ -91,9 +91,11 @@ public class CreateMenuInit implements CorrectType {
                             trainStationList
                     );
                 case 8 -> new CreateInfo().show(trainCompositionList);
-
-                case 9 -> System.out.println("A");
-
+                case 9 -> new CreateDeletingObjectsInit().initialize(
+                        trainCarList,
+                        trainCompositionList,
+                        locomotiveList
+                );
                 case 0 -> System.exit(0);
                 default -> System.out.println("Please insert correct option!");
             }

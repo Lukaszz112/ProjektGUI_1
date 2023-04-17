@@ -40,10 +40,6 @@ public class TrainComposition implements Runnable, CorrectType {
     }
 
     private boolean readyToGo = true;
-    public boolean isReadyToGo() {
-        return readyToGo;
-    }
-
     private int sumOfElectricTrainCars = 0;
 
     Random rand = new Random();

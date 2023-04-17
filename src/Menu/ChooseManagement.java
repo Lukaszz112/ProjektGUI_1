@@ -1,6 +1,8 @@
 package Menu;
 
+import Menu.Exception.DoesntExist;
 import Menu.Interfaces.CorrectType;
+import TrainComposition.Locomotive.Locomotive;
 import TrainComposition.TrainCars.Abstract.TrainCar;
 import TrainComposition.TrainCars.Load;
 import TrainComposition.TrainComposition;
@@ -96,9 +98,37 @@ public class ChooseManagement implements CorrectType {
 
         System.out.println("====================================");
 
+        int userChoice;
         System.out.println(placeholder);
-        int userChoice = getValue(scan, Integer.class);
+
+        do{
+            userChoice = getValue(scan, Integer.class);
+        }while(userChoice < 0 || userChoice > trainStationList.size());
+
 
         return trainStationList.get(userChoice-1);
+    }
+
+    public Locomotive getCorrectLocomotive(
+            List<Locomotive> locomotiveList
+    ) {
+        System.out.println("====================================");
+
+        locomotiveList.stream()
+                .mapToInt(locomotiveList::indexOf)
+                .mapToObj(i -> String.format("%d: %s", i+1, locomotiveList.get(i).toString()))
+                .forEach(System.out::println);
+
+        System.out.println("====================================");
+
+        int userChoice;
+        System.out.println("Which locomotive do you want to use?: ");
+
+        do{
+            userChoice = getValue(scan, Integer.class);
+        }while(userChoice < 0 || userChoice > locomotiveList.size());
+
+
+        return locomotiveList.get(userChoice - 1);
     }
 }
