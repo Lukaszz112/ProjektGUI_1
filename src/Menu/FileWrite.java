@@ -20,7 +20,7 @@ public class FileWrite implements Runnable{
         while(true){
             try {
                 BufferedWriter writer = new BufferedWriter(
-                        new FileWriter("trainStateInfo.txt")
+                        new FileWriter("AppState.txt")
                 );
                 String a = trainCompositionList.stream()
                         .filter(x -> x.getLocomotive().getFinalStation() != null)
