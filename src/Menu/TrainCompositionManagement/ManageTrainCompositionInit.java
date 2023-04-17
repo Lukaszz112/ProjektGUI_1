@@ -37,7 +37,13 @@ public class ManageTrainCompositionInit implements CorrectType {
         }while(userChoice > 2 || userChoice < 1);
 
         switch (userChoice) {
-            case 1 -> new ManageTrainComposition().add(trainCompositionList, trainCarList);
+            case 1 -> {
+                try {
+                    new ManageTrainComposition().add(trainCompositionList, trainCarList);
+                } catch (AlreadyOnJourney e) {
+                    System.out.println(e.getMessage());
+                }
+            }
             case 2 -> {
                 try {
                     new ManageTrainComposition().remove(trainCompositionList, trainCarList);

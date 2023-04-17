@@ -2,11 +2,11 @@ package TrainComposition.TrainCars.FreightCars.Basic;
 
 import TrainComposition.TrainCars.Abstract.FreightCars;
 import TrainComposition.TrainCars.Abstract.TrainCarFreightType;
+import TrainComposition.TrainCars.Interfaces.LiquidGoods;
 
-public class LiquidGoodsCar extends FreightCars {
-    private String liquidComposition;
-    private int trainCarCapacity;
-
+public class LiquidGoodsCar extends FreightCars implements LiquidGoods {
+    private final String liquidComposition;
+    private final int trainCarCapacity;
     public LiquidGoodsCar(
             String security,
             String sender,

@@ -1,6 +1,7 @@
 package Menu.TrainCompositionManagement;
 
 import Menu.ChooseManagement;
+import Menu.Exception.AlreadyOnJourney;
 import TrainComposition.TrainComposition;
 import TrainJourney.TrainStation;
 
@@ -13,8 +14,13 @@ public class ManageTrainJourney {
             List<TrainComposition> runningTrainCompositionList,
             List<Thread> threadList,
             List<TrainStation> trainStationList
-    ) {
+    ) throws AlreadyOnJourney {
         TrainComposition trainComposition = chooseManagement.getCorrectTrainComposition(trainCompositionList);
+
+        if(trainComposition.getLocomotive().getFinalStation() != null){
+            throw new AlreadyOnJourney("Train composition is already on journey!");
+        }
+
         TrainStation startStation = chooseManagement.getCorrectTrainStation(
                 trainStationList,
                 "Choose start station: "

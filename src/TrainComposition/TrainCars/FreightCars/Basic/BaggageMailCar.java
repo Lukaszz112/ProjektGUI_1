@@ -4,8 +4,8 @@ import TrainComposition.TrainCars.Abstract.FreightCars;
 import TrainComposition.TrainCars.Abstract.TrainCarFreightType;
 
 public class BaggageMailCar extends FreightCars {
-    private int amountOfLuggage;
-    private int numOfEnvelopes;
+    private final int amountOfLuggage;
+    private final int numOfEnvelopes;
 
     public BaggageMailCar(
             String security,

@@ -15,7 +15,7 @@ public class ManageTrainComposition implements CorrectType {
             List<TrainComposition> trainCompositionList,
             List<TrainCar> trainCarList
     ) throws
-            DoesntExist
+            DoesntExist, AlreadyOnJourney
     {
 
         TrainComposition chosenTrainComposition = chooseManagement.getCorrectTrainComposition(trainCompositionList);
@@ -24,10 +24,13 @@ public class ManageTrainComposition implements CorrectType {
             throw new DoesntExist("Train car doesn't exist! Create first!");
         }
 
+        if(chosenTrainComposition.getLocomotive().getFinalStation() != null){
+            throw new AlreadyOnJourney("Train is already on journey!");
+        }
+
         TrainCar chosenTrainCar = chooseManagement.getCorrectTrainCar(trainCarList);
 
         try{
-            assert chosenTrainComposition != null;
             chosenTrainComposition.add(chosenTrainCar);
             trainCarList.remove(chosenTrainCar);
             System.out.println("The Train Car plugged successfully!");

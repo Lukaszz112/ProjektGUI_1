@@ -3,8 +3,8 @@ package TrainComposition.TrainCars.FreightCars.Heavy;
 import TrainComposition.TrainCars.Abstract.TrainCarFreightType;
 
 public class ToxicMaterialCar extends FreightHeavyCar{
-    private String typeOfToxicMaterial;
-    private int capacity;
+    private final String typeOfToxicMaterial;
+    private final int capacity;
 
     public ToxicMaterialCar(
             String security,

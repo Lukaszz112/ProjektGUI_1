@@ -1,10 +1,11 @@
 package TrainComposition.TrainCars.FreightCars.Heavy;
 
 import TrainComposition.TrainCars.Abstract.TrainCarFreightType;
+import TrainComposition.TrainCars.Interfaces.LiquidGoods;
 
-public class LiquidToxicMaterialCar extends FreightHeavyCar {
-    private String typeOfLiquidToxicMaterial;
-    private int capacity;
+public class LiquidToxicMaterialCar extends FreightHeavyCar implements LiquidGoods {
+    private final String typeOfLiquidToxicMaterial;
+    private final int capacity;
 
     public LiquidToxicMaterialCar(
             String security,

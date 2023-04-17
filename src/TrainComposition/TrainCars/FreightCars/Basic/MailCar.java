@@ -5,8 +5,8 @@ import TrainComposition.TrainCars.Abstract.FreightCars;
 import TrainComposition.TrainCars.Abstract.TrainCarFreightType;
 
 public class MailCar extends FreightCars implements ElectricCars {
-    private int numOfShipments;
-    private String responsibleCompany;
+    private final int numOfShipments;
+    private final String responsibleCompany;
 
     public MailCar(
             String security,

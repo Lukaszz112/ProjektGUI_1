@@ -21,7 +21,11 @@ public class CreateLocomotive implements CorrectType{
         int numOfTrainCars = getValue(scan, Integer.class);
 
         System.out.println("Enter maximum quantity of electric cars: ");
-        int numOfElectricTrainCars = getValue(scan, Integer.class);
+        int numOfElectricTrainCars;
+
+        do{
+            numOfElectricTrainCars = getValue(scan, Integer.class);
+        }while(numOfElectricTrainCars > numOfTrainCars);
 
         System.out.println("Enter maximum weight of train cars: ");
         double torsion = getValue(scan, Double.class);

@@ -4,8 +4,8 @@ import TrainComposition.TrainCars.Abstract.FreightCars;
 import TrainComposition.TrainCars.Abstract.TrainCarFreightType;
 
 public abstract class FreightHeavyCar extends FreightCars {
-    private String warnings;
-    private String requiredLicenses;
+    private final String warnings;
+    private final String requiredLicenses;
 
     public FreightHeavyCar(
             String security,

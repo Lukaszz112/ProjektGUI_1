@@ -25,7 +25,10 @@ public class CreateFreightCar implements CorrectType {
         double netWeight = getValue(scan, Double.class);
 
         System.out.println("Gross weight: ");
-        double grossWeight = getValue(scan, Double.class);
+        double grossWeight;
+        do{
+            grossWeight = getValue(scan, Integer.class);
+        }while(grossWeight < netWeight);
 
         System.out.println("==========================");
         for (int i = 0; i < trainCarFreightTypes.length; i++) {

@@ -30,8 +30,8 @@ public class CreateMenuInit implements CorrectType {
 
     public void initialize(){
         Scanner scan = new Scanner(System.in);
-
         String monitor = "";
+
         new TestObj().create(
                 trainStationList,
                 locomotiveList,
@@ -54,8 +54,14 @@ public class CreateMenuInit implements CorrectType {
             userSelection = getValue(scan, Integer.class);
 
             switch (userSelection) {
-                case 1 -> locomotiveList.add(new CreateLocomotive().createLocomotive(trainStationList));
-                case 2 -> new CreateTrainCarInit().initialize(trainCarList);
+                case 1 -> {
+                    locomotiveList.add(new CreateLocomotive().createLocomotive(trainStationList));
+                    System.out.println("Succes!");
+                }
+                case 2 -> {
+                    new CreateTrainCarInit().initialize(trainCarList);
+                    System.out.println("Succes!");
+                }
                 case 3 ->{
                     try {
                         new CreateTrainComposition().initialize(

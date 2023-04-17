@@ -55,7 +55,6 @@ public class TrainComposition implements Runnable, CorrectType {
         this.busyEdgeList = busyEdgeList;
         this.monitor = monitor;
     }
-
     public void add(TrainCar trainCar) throws
             TooManyElectricCarsException,
             TooHeavyToGoException,
@@ -183,21 +182,22 @@ public class TrainComposition implements Runnable, CorrectType {
                 double traveledToStation = 0;
 
                 do{
-                    if(locomotive.getSpeed() > 200){
-                        try {
-                            throw new RailroadHazard(this.toString());
-                        } catch (RailroadHazard e) {
-                            System.out.println("The train has exceeded the speed limit: \n" + e);
-                        }
-                    }
-
                     locomotive.setSpeed(
                             rand.nextBoolean() ?
                                     locomotive.getSpeed() * 1.03 :
                                     locomotive.getSpeed() * 0.97
                     );
 
-                    double traveled = locomotive.getSpeed()/3.6;
+                    if(locomotive.getSpeed() > 200){
+                        try {
+                            throw new RailroadHazard(this.toString());
+                        } catch (RailroadHazard e) {
+                            System.out.println("The train has exceeded the speed limit: \n" + e);
+                        }
+                        locomotive.setSpeed(150);
+                    }
+
+                    double traveled = locomotive.getSpeed()/3.6 * 3;
                     distanceToNextStation -= traveled;
 
                     double traveledToStation1 = distanceToNextStation < 0 ?
@@ -209,13 +209,16 @@ public class TrainComposition implements Runnable, CorrectType {
                     routeTraveled += traveledToStation1;
 
                     try{
-                        Thread.sleep(100);
+                        Thread.sleep(1000);
                     }catch (InterruptedException e){
                         e.printStackTrace();
                     }
 
                     locomotive.setJourneyPercent(((routeTraveled/1000)/routeDistance)*100);
                     locomotive.setToStationPercent(((traveledToStation/1000)/distance)*100);
+
+//                    Wyswietlanie drogi (przyklad prewencji kolizji)
+//                    System.out.println(uid + ": " + (int)locomotive.getToStationPercent() + "% " + nextStation);
 
                 }while(distanceToNextStation > 0);
 

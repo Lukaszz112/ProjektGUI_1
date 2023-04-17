@@ -5,8 +5,8 @@ import TrainComposition.TrainCars.Abstract.FreightCars;
 import TrainComposition.TrainCars.Abstract.TrainCarFreightType;
 
 public class RefrigeratedCar extends FreightCars implements ElectricCars {
-    private int minimumTemperature;
-    private int basicTemperature;
+    private final int minimumTemperature;
+    private final int basicTemperature;
 
     public RefrigeratedCar(
             String security,

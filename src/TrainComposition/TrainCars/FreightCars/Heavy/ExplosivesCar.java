@@ -3,8 +3,8 @@ package TrainComposition.TrainCars.FreightCars.Heavy;
 import TrainComposition.TrainCars.Abstract.TrainCarFreightType;
 
 public class ExplosivesCar extends FreightHeavyCar{
-    private String typeOfExplosives;
-    private int amountOfExplosives;
+    private final String typeOfExplosives;
+    private final int amountOfExplosives;
 
     public ExplosivesCar(
             String security,

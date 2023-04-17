@@ -4,8 +4,8 @@ import TrainComposition.TrainCars.Abstract.FreightCars;
 import TrainComposition.TrainCars.Abstract.TrainCarFreightType;
 
 public class GaseousMaterialsCar extends FreightCars {
-    private String typeOfGas;
-    private int resublimationTemperature;
+    private final String typeOfGas;
+    private final int resublimationTemperature;
 
     public GaseousMaterialsCar(
             String security,

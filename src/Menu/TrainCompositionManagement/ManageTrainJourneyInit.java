@@ -1,5 +1,6 @@
 package Menu.TrainCompositionManagement;
 
+import Menu.Exception.AlreadyOnJourney;
 import Menu.Interfaces.CorrectType;
 import TrainComposition.TrainComposition;
 import TrainJourney.TrainStation;
@@ -31,12 +32,17 @@ public class ManageTrainJourneyInit implements CorrectType {
         }while(userChoice > 2 || userChoice < 1);
 
             if (userChoice == 1) {
-                new ManageTrainJourney().start(
-                        trainCompositionList,
-                        runningTrainCompositionList,
-                        threadList,
-                        trainStationList
-                );
+                try{
+                    new ManageTrainJourney().start(
+                            trainCompositionList,
+                            runningTrainCompositionList,
+                            threadList,
+                            trainStationList
+                    );
+                }catch (AlreadyOnJourney e){
+                    System.out.println(e.getMessage());
+                }
+
             }
     }
 }
