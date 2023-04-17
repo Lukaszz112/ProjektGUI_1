@@ -1,6 +1,7 @@
 package Menu.TrainCompositionManagement;
 
 import Menu.ChooseManagement;
+import Menu.Exception.AlreadyOnJourney;
 import Menu.Exception.DoesntExist;
 import Menu.Interfaces.CorrectType;
 import TrainComposition.TrainCars.Abstract.TrainCar;
@@ -17,15 +18,17 @@ public class ManageTrainCarLoads implements CorrectType {
     public void add(
                 List<TrainComposition> trainCompositionList
     ) throws
-        DoesntExist
-        {
+            DoesntExist, AlreadyOnJourney {
 
             TrainComposition chosenTrainComposition = chooseManagement
                     .getCorrectTrainComposition(
                             trainCompositionList
                     );
 
-            assert chosenTrainComposition != null;
+            if(chosenTrainComposition.getLocomotive().getFinalStation() != null){
+                throw new AlreadyOnJourney("Train is already on journey!");
+            }
+
             List<TrainCar> trainCarList = chosenTrainComposition.getTrainCars();
 
             if(trainCarList.size() < 1){
@@ -54,14 +57,16 @@ public class ManageTrainCarLoads implements CorrectType {
     public void remove(
             List< TrainComposition > trainCompositionList
     ) throws
-            DoesntExist
-    {
+            DoesntExist, AlreadyOnJourney {
         TrainComposition chosenTrainComposition = chooseManagement
                 .getCorrectTrainComposition(
                         trainCompositionList
                 );
 
-        assert chosenTrainComposition != null;
+        if(chosenTrainComposition.getLocomotive().getFinalStation() != null){
+            throw new AlreadyOnJourney("Train is already on journey!");
+        }
+
         List<TrainCar> trainCarList = chosenTrainComposition.getTrainCars();
 
         if(trainCarList.size() < 1){

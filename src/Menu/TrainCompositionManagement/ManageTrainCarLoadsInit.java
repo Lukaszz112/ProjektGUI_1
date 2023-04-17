@@ -1,5 +1,6 @@
 package Menu.TrainCompositionManagement;
 
+import Menu.Exception.AlreadyOnJourney;
 import Menu.Exception.DoesntExist;
 import Menu.Interfaces.CorrectType;
 import TrainComposition.TrainComposition;
@@ -29,14 +30,14 @@ public class ManageTrainCarLoadsInit implements CorrectType {
             case 1 -> {
                 try{
                     new ManageTrainCarLoads().add(trainCompositionList);
-                }catch (DoesntExist e){
+                }catch (DoesntExist | AlreadyOnJourney e){
                     System.out.println(e.getMessage());
                 }
             }
             case 2 -> {
                 try{
                     new ManageTrainCarLoads().remove(trainCompositionList);
-                }catch (DoesntExist e){
+                }catch (DoesntExist | AlreadyOnJourney e){
                     System.out.println(e.getMessage());
                 }
             }

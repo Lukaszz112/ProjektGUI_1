@@ -12,7 +12,7 @@ public interface CorrectType{
                 continue;
             }
             try {
-                return type.getConstructor(String.class).newInstance(s.nextLine());
+                return type.getConstructor(String.class).newInstance(s.next());
             } catch (
                     NoSuchMethodException |
                     InstantiationException |

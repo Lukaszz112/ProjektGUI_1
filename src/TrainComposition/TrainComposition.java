@@ -231,13 +231,13 @@ public class TrainComposition implements Runnable, CorrectType {
                 }while(distanceToNextStation > 0);
 
                 synchronized (monitor) {
-                    busyEdgeList.remove(reverseEdge);
                     busyEdgeList.remove(nextStation);
+                    busyEdgeList.remove(reverseEdge);
 
                     if (path.get(i).getQueue().size() > 0) {
-                        TrainComposition nextTrain = path.get(i).getQueue().get(0);
+                        TrainComposition firstTrain = path.get(i).getQueue().get(0);
 
-                        nextTrain.setReadyToGo(true);
+                        firstTrain.setReadyToGo(true);
                         path.get(i).getQueue().remove(0);
 
                         monitor.notifyAll();
