@@ -21,7 +21,8 @@ public class TestObj {
             List<TrainComposition> trainCompositionList,
             RouteGraph graph,
             List<RouteGraph.Edge> busyEdgeList,
-            String monitor
+            String monitor,
+            List<TrainComposition> runningTrainCompositionList
     ){
         new CreateTrainStation().createTestStation(trainStationList);
         new CreateLocomotive().createTestLocomotives(locomotiveList,trainStationList);
@@ -34,7 +35,8 @@ public class TestObj {
                     trainCompositionList,
                     graph,
                     busyEdgeList,
-                    monitor
+                    monitor,
+                    runningTrainCompositionList
             );
         }catch (
                 TooManyElectricCarsException |

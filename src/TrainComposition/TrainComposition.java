@@ -34,13 +34,19 @@ public class TrainComposition implements Runnable, CorrectType {
     }
 
     private final List<RouteGraph.Edge> busyEdgeList;
+    private final List<TrainComposition> runningTrainCompositionList;
     private final String monitor;
-
+    private boolean readyToGo = true;
     public void setReadyToGo(boolean readyToGo) {
         this.readyToGo = readyToGo;
     }
 
-    private boolean readyToGo = true;
+    private boolean isEndingJourney = false;
+
+    public void setEndingJourney(boolean endingJourney) {
+        isEndingJourney = endingJourney;
+    }
+
     private int sumOfElectricTrainCars = 0;
 
     Random rand = new Random();
@@ -48,12 +54,14 @@ public class TrainComposition implements Runnable, CorrectType {
             Locomotive locomotive,
             RouteGraph graph,
             List<RouteGraph.Edge> busyEdgeList,
-            String monitor
+            String monitor,
+            List<TrainComposition> runningTrainCompositionList
     ) {
         this.locomotive = locomotive;
         this.graph = graph;
         this.busyEdgeList = busyEdgeList;
         this.monitor = monitor;
+        this.runningTrainCompositionList = runningTrainCompositionList;
     }
     public void add(TrainCar trainCar) throws
             TooManyElectricCarsException,
@@ -234,6 +242,17 @@ public class TrainComposition implements Runnable, CorrectType {
 
                         monitor.notifyAll();
                     }
+
+                    if(isEndingJourney){
+                        this.getLocomotive().setStartingStation(null);
+                        this.getLocomotive().setFinalStation(null);
+
+                        Thread.currentThread().interrupt();
+                        runningTrainCompositionList.remove(this);
+
+                        System.out.println("Train : " + this.getUid() + " ended its run!");
+                        break;
+                    }
                 }
 
                 try{
@@ -242,6 +261,8 @@ public class TrainComposition implements Runnable, CorrectType {
                     e.printStackTrace();
                 }
             }
+
+            if(isEndingJourney) break;
 
             try{
                 Thread.sleep(30000);

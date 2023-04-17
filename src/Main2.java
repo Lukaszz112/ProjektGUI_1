@@ -21,6 +21,7 @@ public class Main2 {
         TrainStation trainStation2 = new TrainStation("Warszawa");
 
         List<RouteGraph.Edge> busyEdges = new ArrayList<>();
+        List<TrainComposition> runningTrainCompositionList = new ArrayList<>();
 
         Locomotive locomotive1 = new Locomotive(
                 "Nazwa",
@@ -90,9 +91,9 @@ public class Main2 {
         locomotive2.setSpeed(160);
         locomotive3.setSpeed(190);
 
-        TrainComposition trainComposition1 = new TrainComposition(locomotive1,graph,busyEdges,monitor);
-        TrainComposition trainComposition2 = new TrainComposition(locomotive2,graph,busyEdges,monitor);
-        TrainComposition trainComposition3 = new TrainComposition(locomotive3,graph,busyEdges,monitor);
+        TrainComposition trainComposition1 = new TrainComposition(locomotive1,graph,busyEdges,monitor,runningTrainCompositionList);
+        TrainComposition trainComposition2 = new TrainComposition(locomotive2,graph,busyEdges,monitor,runningTrainCompositionList);
+        TrainComposition trainComposition3 = new TrainComposition(locomotive3,graph,busyEdges,monitor,runningTrainCompositionList);
 
         try {
             trainComposition1.add(trainCar);
@@ -110,5 +111,8 @@ public class Main2 {
         t1.start();
         t2.start();
         t3.start();
+        runningTrainCompositionList.add(trainComposition1);
+        runningTrainCompositionList.add(trainComposition2);
+        runningTrainCompositionList.add(trainComposition3);
     }
 }

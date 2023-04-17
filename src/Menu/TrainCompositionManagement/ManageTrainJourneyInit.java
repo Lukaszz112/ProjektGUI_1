@@ -19,7 +19,7 @@ public class ManageTrainJourneyInit implements CorrectType {
 
         System.out.println("=============================");
         System.out.println("= 1. Start journey          =");
-        System.out.println("= 2. In progress...         =");
+        System.out.println("= 2. Stop journey           =");
         System.out.println("=============================");
 
         int userChoice;
@@ -31,18 +31,22 @@ public class ManageTrainJourneyInit implements CorrectType {
             }
         }while(userChoice > 2 || userChoice < 1);
 
-            if (userChoice == 1) {
-                try{
-                    new ManageTrainJourney().start(
-                            trainCompositionList,
-                            runningTrainCompositionList,
-                            threadList,
-                            trainStationList
-                    );
-                }catch (AlreadyOnJourney e){
-                    System.out.println(e.getMessage());
+            switch (userChoice){
+                case  1 -> {
+                    try{
+                        new ManageTrainJourney().start(
+                                trainCompositionList,
+                                runningTrainCompositionList,
+                                threadList,
+                                trainStationList
+                        );
+                    }catch (AlreadyOnJourney e){
+                        System.out.println(e.getMessage());
+                    }
                 }
-
+                case 2 ->{
+                    new ManageTrainJourney().stop(trainCompositionList);
+                }
             }
     }
 }

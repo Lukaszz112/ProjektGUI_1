@@ -39,7 +39,8 @@ public class CreateMenuInit implements CorrectType {
                 trainCompositionList,
                 graph,
                 busyEdgeList,
-                monitor
+                monitor,
+                runningTrainCompositionList
         );
         graph.automaticAddStation(trainStationList);
         graph.automaticAddEdge(trainStationList);
@@ -50,6 +51,7 @@ public class CreateMenuInit implements CorrectType {
         int userSelection;
 
         do {
+            new CreateMenuList().createMenuList();
             System.out.println("What do you want to do?: ");
             userSelection = getValue(scan, Integer.class);
 
@@ -69,7 +71,8 @@ public class CreateMenuInit implements CorrectType {
                                 locomotiveList,
                                 graph,
                                 busyEdgeList,
-                                monitor
+                                monitor,
+                                runningTrainCompositionList
                         );
                     }catch (ThisLocomotiveIsAlreadyUsed | ThereIsNoSuchLocomotiveYet | DoesntExist e){
                         System.out.println(e.getMessage());

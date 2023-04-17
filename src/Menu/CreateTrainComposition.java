@@ -22,7 +22,8 @@ public class CreateTrainComposition implements CorrectType {
             List<Locomotive> locomotiveList,
             RouteGraph graph,
             List<RouteGraph.Edge> busyEdgeList,
-            String monitor
+            String monitor,
+            List<TrainComposition> runningTrainCompositionList
     ) throws
             ThereIsNoSuchLocomotiveYet,
             ThisLocomotiveIsAlreadyUsed,
@@ -48,7 +49,13 @@ public class CreateTrainComposition implements CorrectType {
             );
         }
 
-        trainCompositionList.add(new TrainComposition(locomotiveToAdd,graph,busyEdgeList,monitor));
+        trainCompositionList.add(new TrainComposition(
+                locomotiveToAdd,
+                graph,
+                busyEdgeList,
+                monitor,
+                runningTrainCompositionList
+        ));
         System.out.println("Train composition created!");
     }
 
@@ -58,7 +65,8 @@ public class CreateTrainComposition implements CorrectType {
             List<TrainComposition> trainCompositionList,
             RouteGraph graph,
             List<RouteGraph.Edge> busyEdgeList,
-            String monitor
+            String monitor,
+            List<TrainComposition> runningTrainCompositionList
     ) throws
             TooManyElectricCarsException,
             TooHeavyToGoException,
@@ -86,7 +94,13 @@ public class CreateTrainComposition implements CorrectType {
                 }
             } while (isLocomotiveAlreadyUsed);
 
-            TrainComposition trainComposition = new TrainComposition(locomotive,graph,busyEdgeList, monitor);
+            TrainComposition trainComposition = new TrainComposition(
+                    locomotive,
+                    graph,
+                    busyEdgeList,
+                    monitor,
+                    runningTrainCompositionList
+            );
             trainCompositionList.add(trainComposition);
 
             for (int j = 0; j < rand.nextInt(5)+5; j++) {
