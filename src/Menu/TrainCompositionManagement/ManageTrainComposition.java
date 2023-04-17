@@ -1,6 +1,7 @@
 package Menu.TrainCompositionManagement;
 
 import Menu.ChooseManagement;
+import Menu.Exception.AlreadyOnJourney;
 import Menu.Exception.DoesntExist;
 import Menu.Interfaces.CorrectType;
 import TrainComposition.Exceptions.*;
@@ -45,9 +46,14 @@ public class ManageTrainComposition implements CorrectType {
             List<TrainComposition> trainCompositionList,
             List<TrainCar> trainCarList
     ) throws
-            IsNotAlreadyPluggedException
+            IsNotAlreadyPluggedException,
+            AlreadyOnJourney
     {
         TrainComposition chosenTrainComposition = chooseManagement.getCorrectTrainComposition(trainCompositionList);
+
+        if(chosenTrainComposition.getLocomotive().getFinalStation() != null){
+            throw new AlreadyOnJourney("Train is already on journey, you cant remove train cars!");
+        }
 
         List<TrainCar> localTrainCarList = chosenTrainComposition.getTrainCars().stream()
                 .toList();

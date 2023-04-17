@@ -18,6 +18,7 @@ public class ManageTrainJourneyInit implements CorrectType {
 
         System.out.println("=============================");
         System.out.println("= 1. Start journey          =");
+        System.out.println("= 2. In progress...         =");
         System.out.println("=============================");
 
         int userChoice;

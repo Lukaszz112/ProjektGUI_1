@@ -1,7 +1,7 @@
 package TrainComposition.TrainCars.Abstract;
 
 import TrainComposition.Locomotive.Locomotive;
-import TrainComposition.TrainCars.Exceptions.TooHeavyGoods;
+import TrainComposition.Exceptions.TooHeavyGoods;
 import TrainComposition.TrainCars.Load;
 
 import java.util.ArrayList;

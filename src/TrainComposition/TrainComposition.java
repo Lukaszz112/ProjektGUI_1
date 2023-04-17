@@ -10,6 +10,7 @@ import TrainJourney.TrainStation;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class TrainComposition implements Runnable, CorrectType {
@@ -100,7 +101,11 @@ public class TrainComposition implements Runnable, CorrectType {
                 ". TrainComposition: " +
                 ", locomotive: " + locomotive +
                 ", train cars: " + trainCars.stream()
-                                        .sorted(Comparator.comparing(x -> x.getWeightOfAllStuff() + x.getNetWeight())) +
+                                        .sorted(Comparator.comparing(x -> x.getWeightOfAllStuff() + x.getNetWeight()))
+                                        .mapToInt(TrainCar::getUid)
+                                        .mapToObj(String::valueOf)
+                                        .collect(Collectors.joining(", ")) +
+
                 ", sumOfElectricTrainCars=" + sumOfElectricTrainCars;
     }
 

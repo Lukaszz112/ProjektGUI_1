@@ -1,5 +1,6 @@
 package Menu.TrainCompositionManagement;
 
+import Menu.Exception.AlreadyOnJourney;
 import Menu.Exception.DoesntExist;
 import Menu.Interfaces.CorrectType;
 import TrainComposition.Exceptions.IsNotAlreadyPluggedException;
@@ -40,7 +41,10 @@ public class ManageTrainCompositionInit implements CorrectType {
             case 2 -> {
                 try {
                     new ManageTrainComposition().remove(trainCompositionList, trainCarList);
-                }catch(IsNotAlreadyPluggedException e){
+                }catch(
+                        IsNotAlreadyPluggedException |
+                        AlreadyOnJourney e
+                ){
                     System.out.println(e.getMessage());
                 }
             }

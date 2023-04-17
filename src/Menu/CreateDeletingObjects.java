@@ -4,6 +4,7 @@ import Menu.Exception.AlreadyOnJourney;
 import Menu.Exception.IsAlreadyPlugged;
 import TrainComposition.Locomotive.Locomotive;
 import TrainComposition.TrainCars.Abstract.TrainCar;
+import TrainComposition.Exceptions.TooHeavyGoods;
 import TrainComposition.TrainComposition;
 
 import java.util.List;
@@ -12,10 +13,16 @@ public class CreateDeletingObjects {
     ChooseManagement chooseManagement = new ChooseManagement();
     public void deleteTrainCar(
             List<TrainCar> trainCarList
-    ){
+    ) throws
+            TooHeavyGoods
+    {
         TrainCar trainCar = chooseManagement.getCorrectTrainCar(trainCarList);
-        trainCarList.remove(trainCar);
 
+        if(trainCar.getLoadList().size() > 0){
+            throw new TooHeavyGoods("This train car includes loads! Please remove");
+        }
+
+        trainCarList.remove(trainCar);
     }
 
     public void deleteTrainComposition (

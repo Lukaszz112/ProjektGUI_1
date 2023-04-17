@@ -4,6 +4,7 @@ import Menu.CreateTrainCars.CreateTrainCar;
 import Menu.Exception.AlreadyOnJourney;
 import Menu.Exception.IsAlreadyPlugged;
 import Menu.Interfaces.CorrectType;
+import TrainComposition.Exceptions.TooHeavyGoods;
 import TrainComposition.Locomotive.Locomotive;
 import TrainComposition.TrainCars.Abstract.TrainCar;
 import TrainComposition.TrainComposition;
@@ -36,7 +37,11 @@ public class CreateDeletingObjectsInit implements CorrectType {
 
         switch (userChoice){
             case 1 -> {
-                new CreateDeletingObjects().deleteTrainCar(trainCarList);
+                try {
+                    new CreateDeletingObjects().deleteTrainCar(trainCarList);
+                } catch (TooHeavyGoods e) {
+                    System.out.println(e.getMessage());
+                }
             }
             case 2 -> {
                 try {

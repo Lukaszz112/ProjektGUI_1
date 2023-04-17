@@ -4,7 +4,7 @@ import Menu.ChooseManagement;
 import Menu.Exception.DoesntExist;
 import Menu.Interfaces.CorrectType;
 import TrainComposition.TrainCars.Abstract.TrainCar;
-import TrainComposition.TrainCars.Exceptions.TooHeavyGoods;
+import TrainComposition.Exceptions.TooHeavyGoods;
 import TrainComposition.TrainCars.Load;
 import TrainComposition.TrainComposition;
 
